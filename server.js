@@ -1,17 +1,24 @@
 const express = require('express');
-const db = require('./models');
-const routes = require('./routes');
+// const db = require('./models');
+const apiRoutes = require('./routes/api-routes');
+const htmlRoutes = require('./routes/html-routes');
 
 const app = express();
 
 const PORT = process.env.PORT || 8080;
+const db = require('./models');
+
+// const router = express.Router();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
-app.use('/', routes);
-
+app.use('/api', apiRoutes);
+app.use('/', htmlRoutes)
+// router.get('/api', function (req,res) {
+//   res.send(console.log('WOW IT WORKS!'));
+// })
 // Sync sequelize models then start Express app
 // =============================================
 db.sequelize.sync().then(() => {
