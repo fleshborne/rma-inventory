@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     dateTested: DataTypes.INTEGER,
     manufactureDate: DataTypes.INTEGER,
     dateSentManufacture: DataTypes.INTEGER,
-    serialNumber: DataTypes.STRING,
+    // serialNumber: DataTypes.STRING,
     reasonForReturn: DataTypes.STRING,
     returnToProd: DataTypes.BOOLEAN,
     returnToStock: DataTypes.BOOLEAN,

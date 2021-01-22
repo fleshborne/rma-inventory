@@ -6,12 +6,21 @@
 module.exports = (sequelize,DataTypes) => {
 
     const Part = sequelize.define('Part', {
+    
         partType : {
             type: DataTypes.STRING,
             allowNull:false,
-        }
+        },
+        serialNumber : {
+            type:DataTypes.STRING,
+            allowNull: false,
+        },
+        
     })
-    // Part.associate = (models) => {
+    Part.associate = (models) => {
+        Part.belongsToMany(models.Case, {
+            through: 'Case_Detail'
+        })
     //     Part.belongsTo(models.Case, {
     //         foreignKey: {
     //             allowNull:false
@@ -23,6 +32,6 @@ module.exports = (sequelize,DataTypes) => {
     //     Part.belongsTo(models.Supplier, {
     //         onDelete: 'cascade',
     //     })
-    // }
+    }
     return Part;
 }

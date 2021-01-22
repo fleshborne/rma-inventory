@@ -5,6 +5,12 @@
     module.exports = (sequelize, DataTypes) => {
 
     const Contact = sequelize.define('Contact', {
+        
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+        },
         name: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -20,12 +26,12 @@
         },
 
     });
-    // Contact.associate = (models) => {
-    //     Contact.belongsTo(models.Case, {
-    //         foreignKey: {
-    //             allowNull:false,
-    //         }
-    //     })
-    // }
+    Contact.associate = (models) => {
+        Contact.belongsTo(models.Case, {
+            foreignKey: {
+                allowNull:false,
+            }
+        })
+    }
     return Contact
 }

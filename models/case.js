@@ -29,22 +29,19 @@ module.exports = (sequelize, DataTypes) => {
         Case.belongsToMany(models.User, {
             through: 'Case_Detail',
         })
-    //     Case.belongsToMany(models.User, {
-    //         foreignKey: {
-    //             allowNull: false,
-    //         },
-    //         through: 'caseDetail',
-    //     });
-        Case.belongsToMany(models.Site, {
+        Case.belongsToMany(models.User, {
             foreignKey: {
-                allowNull: false
+                allowNull: false,
             },
+            through: 'Case_Detail',
+        });
+        Case.belongsToMany(models.Site, {
+            // foreignKey: {
+            //     allowNull: false
+            // },
             through: 'Case_Detail',
         })
         Case.belongsToMany(models.Contact, {
-            foreignKey: {
-                allowNull: false,
-        },
             through: 'Case_Detail',
         })
     }

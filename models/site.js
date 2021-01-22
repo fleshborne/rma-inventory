@@ -12,12 +12,10 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         }, 
     })
-    // Site.associate = (models) => {
-    //     Site.belongsTo(models.Case, {
-    //         foreignKey: {
-    //             allowNull: false
-    //         },
-    //     })
-    // }
+    Site.associate = (models) => {
+        Site.belongsToMany(models.Case, {
+       through: 'Case_Detail'
+        })
+    }
     return Site;
 }
