@@ -16,6 +16,14 @@ module.exports = (sequelize, DataTypes) => {
         // or one broad topic column?
 
     })
+    Disposition.associate = (models) => {
+        Disposition.hasOne(models.Case_Detail, {
+            foreignKey: {
+                key: "DispositionId",
+                allowNull: false
+            }
+        })
+    }
 
     
     return Disposition;

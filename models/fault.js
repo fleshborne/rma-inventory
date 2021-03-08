@@ -8,14 +8,15 @@ module.exports = (sequelize, DataTypes) => {
         }
     })
 
-    // Fault.associate = (models) => {
-    //     Fault.belongsToMany(models.Case, {
-    //         foreignKey: {
-    //             allowNull: false,
-    //         },
-    //         through: 'caseDetail',
-    //     });
+    Fault.associate = (models) => {
+        Fault.hasMany(models.Case_Detail, {
+            foreignKey: {
+                key: 'faultId',
+                allowNull: false, 
+            },
 
-    // };
+        });
+
+    };
     return Fault;
 }

@@ -18,9 +18,9 @@ module.exports = (sequelize,DataTypes) => {
         
     })
     Part.associate = (models) => {
-        Part.belongsToMany(models.Case, {
-            through: 'Case_Detail'
-        })
+        // Part.belongsToMany(models.Case, {
+        //     through: 'Case_Detail'
+        // })
     //     Part.belongsTo(models.Case, {
     //         foreignKey: {
     //             allowNull:false
@@ -29,9 +29,17 @@ module.exports = (sequelize,DataTypes) => {
     //     Part.hasMany(models.serialNumber, {
     //         onDelete: 'cascade',
     //     })
-    //     Part.belongsTo(models.Supplier, {
-    //         onDelete: 'cascade',
-    //     })
+        Part.belongsTo(models.Supplier, {
+            foreignKey: {
+                allowNull: false,
+            }
+        }),
+        Part.hasMany(models.Case_Detail, {
+            foreignKey: {
+                allowNull: false,
+                key: 'Part_NumberId'
+            }
+        })
     }
     return Part;
 }

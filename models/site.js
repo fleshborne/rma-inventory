@@ -13,8 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         }, 
     })
     Site.associate = (models) => {
-        Site.belongsToMany(models.Case, {
-       through: 'Case_Detail'
+        Site.hasMany(models.Case, {
+            foreignKey : {
+                allowNull: false,
+            }
         })
     }
     return Site;

@@ -26,24 +26,42 @@ module.exports = (sequelize, DataTypes) => {
   
     })
     Case.associate = (models) => {
-        Case.belongsToMany(models.User, {
-            through: 'Case_Detail',
+        Case.belongsTo(models.User, {
+            foreignKey : {
+                allowNull : false
+            }
         })
-        Case.belongsToMany(models.User, {
+        Case.belongsTo(models.Site, {
             foreignKey: {
-                allowNull: false,
-            },
-            through: 'Case_Detail',
-        });
-        Case.belongsToMany(models.Site, {
-            // foreignKey: {
-            //     allowNull: false
-            // },
-            through: 'Case_Detail',
+                allowNull: false
+            }
         })
-        Case.belongsToMany(models.Contact, {
-            through: 'Case_Detail',
+        Case.belongsTo(models.Contact, {
+            foreignKey: {
+                allowNull : false
+            }
         })
+        
+        // Case.belongsTo(models.User, {
+        //     foreignKey: {
+        //         allowNull: false,
+        //     },
+        //     // through: 'Case_Detail',
+        // });
+        // Case.belongsToMany(models.Site, {
+        //     // foreignKey: {
+        //     //     allowNull: false
+        //     // },
+        //     through: 'Case_Detail',
+        // })
+        // Case.hasMany(models.Contact, {
+        //     foreignKey : {
+        //         allowNull: false,
+        //     }
+        // })
+        // Case.belongsToMany(models.serialNumber, {
+        //     through: 'Case_Detail',
+        // })
     }
     return Case;
 }

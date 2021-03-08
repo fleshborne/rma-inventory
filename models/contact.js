@@ -27,7 +27,7 @@
 
     });
     Contact.associate = (models) => {
-        Contact.belongsTo(models.Case, {
+        Contact.belongsTo(models.User, {
             foreignKey: {
                 allowNull:false,
             }

@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link type="css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="./assets/css/style.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -50,13 +50,15 @@
         </div>
       </div>
     </div>
-    <ul class="collapsible">
+    <grid>
+   <ul class="collapsible">
       <li>
         <div class="collapsible-header" id="viewDatabase"><i class="material-icons ml-4" >filter_drama</i>View Database</div>
-        <div class="collapsible-body">                <table class="responsive-table" id="find-schedule-table">
+        <div class="collapsible-body" id='insertInventory'>                
+          <table class="responsive-table" id="find-schedule-table">
           <thead>
-            <tr>
-              <th>Id</th>
+            <tr class="col s2">
+              <!-- <th>Id</th>
               <th>Item Type</th>
               <th>Project Name</th>
               <th>Internal Contact</th>
@@ -74,20 +76,30 @@
               <th>Return To Manufacture</th>
               <th>Repair in House</th>
               <th>Created at</th>
-              <th>Updated at</th>
+              <th>Updated at</th> -->
             </tr>
           </thead>
 
-          <tbody>
-
-          </tbody>
+          <!-- <tbody>
+            <td>this shit</td>
+            <td>is bananas</td>
+            <td>b</td>
+            <td>a</td>
+            <td>n</td>
+            <td>a</td>
+            <td>n</td>
+            <td>a</td>
+            <td>s</td>
+          </tbody> -->
         </table></div>
       </li>
+    </ul>
+    <ul class="collapsible">
       <li>
-        <div class="collapsible-header"><i class="material-icons ml-4">search</i>Search Results</div>
+        <div class="collapsible-header" id="viewSearchResults"><i class="material-icons ml-4">search</i>Search Results</div>
         <div class="collapsible-body">
           <table class="responsive-table" id="find-schedule-table">
-            <thead>
+          <thead>
               <tr>
                 <th>Id</th>
                 <th>Item Type</th>
@@ -107,7 +119,7 @@
                 <th>Return To Manufacture</th>
                 <th>Repair in House</th>
                 <th>Created at</th>
-                <th>Updated at</th>
+                <th>Updated at</th> 
               </tr>
             </thead>
   
@@ -117,8 +129,11 @@
           </table>
         </div>
       </li>
+    </ul>
+  </grid>
+    <ul class="collapsible">
       <li>
-        <div class="collapsible-header"><i class="material-icons ml-4">add</i>Add Inventory</div>
+        <div class="collapsible-header" id="addInventory"><i class="material-icons ml-4">add</i>Add Inventory</div>
         <div class="collapsible-body"><div class="row">
           <form class="col s12">
             <div class="row">

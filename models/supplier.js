@@ -9,10 +9,10 @@
      },
 
  })
-//  Supplier.associate = (models) => {
-//      Supplier.hasMany(models.Part, {
-//          onDelete: 'cascade',
-//      })
-//  }
+ Supplier.associate = (models) => {
+     Supplier.hasMany(models.Part, {
+         onDelete: 'cascade',
+     })
+ }
  return Supplier
 }

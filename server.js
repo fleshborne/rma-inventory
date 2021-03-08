@@ -13,6 +13,10 @@ const db = require('./models');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
+app.use(
+  // eslint-disable-next-line comma-dangle
+  session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })
+);
 
 app.use('/api', apiRoutes);
 app.use('/', htmlRoutes)
