@@ -4,14 +4,42 @@ const express = require('express');
 
 const router = require('express').Router();
 
-
+// Get Requests##################
 
 router.get('/Case_Detail', (req,res) => {
-    db.caseDetail.findAll().then((response) => {
+    db.caseDetail.findAll({
+        include: [db.Part,db.Fault,db.Disposition]
+    }).then((response) => {
         console.log(response);
         res.json(response);
     })
 });
+router.get('/Part', (req,res) => {
+    db.Part.findAll().then((response) => {
+        console.log(response);
+        res.json(response);
+    })
+})
+router.get('/Fault', (req,res) => {
+    db.Fault.findAll().then((response) => {
+        console.log(response);
+        res.json(response);
+    })
+})
+router.get('/Disposition', (req,res) => {
+    db.Disposition.findAll().then((response) => {
+        console.log(response);
+        res.json(response);
+    })
+})
+router.get('/Part', (req,res) => {
+    db.Part.findAll().then((response) => {
+        console.log(response);
+        res.json(response);
+    })
+})
+
+// Post Requests ##############################################
 router.post('/Case_Detail', (req,res) => {
     // create, takes an argument of an object describing the item we want
     // to insert into our table. In this case we just pass in an object with a text

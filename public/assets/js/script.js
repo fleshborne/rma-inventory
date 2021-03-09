@@ -1,5 +1,12 @@
+// const moment = require("moment");
 
 $(document).ready(() => {
+//     // construct a moment object with UTC-based input
+// const moment = moment.utc('2015-01-01 00:00:00');
+
+// // convert using the TZDB identifier for US Central time
+// moment().format('LT');  
+
 $('.collapsible').collapsible();
 $('.dropdown-trigger').dropdown();
 })
@@ -35,26 +42,28 @@ $('.dropdown-trigger').dropdown();
             const headFaultId = 'Fault Id'
             const headDispositionId = 'Disposition Id'
 
+            const addedToInvent = dateFns.format(createdAt, 'YY MMM D')
+            const updatedInvent = dateFns.format(updatedAt, 'YY MMM D')
             $table.append(`
             <thead>
             <th>${headId}</th>
             <th>${headSerialNumber}</th>
             <th>${headItemType}</th>
-            <th>${headCreatedAt}</th>
-            <th>${headUpdatedAt}</th>
             <th>${headPartId}</th>
             <th>${headFaultId}</th>
-            <th>${headDispositionId}</th> 
+            <th>${headDispositionId}</th>             
+            <th>${headCreatedAt}</th>
+            <th>${headUpdatedAt}</th>
             </thead>
             <tr>
             <td>${id}</td>
             <td>${serialNumber}</td>
             <td>${itemType}</td>
-            <td>${createdAt}</td>
-            <td>${updatedAt}</td>
             <td>${PartId}</td>
             <td>${FaultId}</td>
-            <td>${DispositionId}</td>
+            <td>${DispositionId}</td>            
+            <td>${addedToInvent}</td>
+            <td>${updatedInvent}</td>
             </tr>`)
         });
     }).catch((err) => {
