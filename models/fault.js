@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     })
 
     Fault.associate = (models) => {
-        Fault.hasMany(models.Case_Detail, {
+        Fault.hasMany(models.caseDetail, {
             foreignKey: {
                 key: 'faultId',
                 allowNull: false, 

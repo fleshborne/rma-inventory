@@ -57,26 +57,15 @@
         <div class="collapsible-body" id='insertInventory'>                
           <table class="responsive-table" id="find-schedule-table">
           <thead>
-            <tr class="col s2">
-              <!-- <th>Id</th>
-              <th>Item Type</th>
-              <th>Project Name</th>
-              <th>Internal Contact</th>
-              <th>Tracking ID</th>
-              <th>Carrier</th>
-              <th>Item Value</th>
-              <th>Date Received</th>
-              <th>Date Tested</th>
-              <th>Date of Manufacture</th>
-              <th>Date sent Manufacture</th>
-              <th>Serial Number</th>
-              <th>Reason For Return</th>
-              <th>Return to Production</th>
-              <th>Return To Stock</th>
-              <th>Return To Manufacture</th>
-              <th>Repair in House</th>
-              <th>Created at</th>
-              <th>Updated at</th> -->
+            <tr>
+                <th>Id</th>
+                <th>Serial Number</th>
+                <th>Item Type</th>
+                <th>Created At</th>
+                <th>Updated At</th>
+                <th>Part Id</th>
+                <th>Fault Id</th>
+                <th>Disposition Id</th> 
             </tr>
           </thead>
 
@@ -134,80 +123,34 @@
     <ul class="collapsible">
       <li>
         <div class="collapsible-header" id="addInventory"><i class="material-icons ml-4">add</i>Add Inventory</div>
-        <div class="collapsible-body"><div class="row">
+        <div class="collapsible-body">
+          <div class="row">
           <form class="col s12">
             <div class="row">
-              <div class="input-field col s2">
-                <input placeholder="Enter Text Here" id="item_type" type="text" class="validate">
-                <label for="item_type">Item Type</label>
-              </div>
-              <div class="input-field col s2">
-                <input placeholder="Enter Text Here" id="project_name" type="text" class="validate">
-                <label for="project_name">Site/Project</label>
-              </div>
-              <div class="input-field col s2">
-                <input placeholder="Enter Text Here" id="internal_contact" type="text" class="validate">
-                <label for="internal_contact">Internal Contact</label>
-              </div>              
-              <div class="input-field col s2">
-                <input placeholder="Enter Text Here" id="tracking_id" type="text" class="validate">
-                <label for="tracking_id">Tracking Id</label>
-              </div>
-              <div class="input-field col s2">
-                <input placeholder="Enter Text Here" id="carrier" type="text" class="validate">
-                <label for="carrier">Carrier</label>
-              </div>
-              <div class="input-field col s2">
-                <input placeholder="Enter Text Here" id="item_value" type="text" class="validate">
-                <label for="item_value">Item Value</label>
-              </div>
-              <div class="input-field col s2">
-                <input placeholder="Enter Text Here" id="date_received" type="text" class="validate">
-                <label for="date_received">Date Received</label>
-              </div>
-                <div class="input-field col s2">
-                  <input placeholder="Enter Text Here" id="date_tested" type="text" class="validate">
-                  <label for="date_tested">Date Tested</label>
-                </div>
-                <div class="input-field col s2">
-                  <input placeholder="Enter Text Here" id="date_manufactured" type="text" class="validate">
-                  <label for="date_manufactured">Date of Manufacture</label>
-                </div>
-                <div class="input-field col s2">
-                  <input placeholder="Enter Text Here" id="serial_number" type="text" class="validate">
-                  <label for="serial_number">Serial Number</label>
-                </div>
-                <div class="input-field col s2">
-                  <input placeholder="Enter Text Here" id="reason_for_return" type="text" class="validate">
-                  <label for="reason_for_return">Reason for Return</label>
-                </div>
-                <div class="input-field col s2">
-                  <input placeholder="Enter Text Here" id="return_to_production" type="text" class="validate">
-                  <label for="return_to_production">Return To Production</label>
-                </div>
-                <div class="input-field col s2">
-                  <input placeholder="Enter Text Here" id="return_to_stock" type="text" class="validate">
-                  <label for="return_to_stock">Return To Stock</label>
-                </div>
-                <div class="input-field col s2">
-                  <input placeholder="Enter Text Here" id="return_to_manufacture" type="text" class="validate">
-                  <label for="return_to_manufacture">Return To Manufacture</label>
-                </div>
-                <div class="input-field col s2">
-                  <input placeholder="Enter Text Here" id="repair_in_house" type="text" class="validate">
-                  <label for="repair_in_house">Repair in House</label>
-                </div>
-                <div class="input-field col s2">
-                  <input placeholder="Enter Text Here" id="created_at" type="text" class="validate">
-                  <label for="created_at">Created At</label>
-                </div>                <div class="input-field col s2">
-                  <input placeholder="Enter Text Here" id="updated_at" type="text" class="validate">
-                  <label for="updated_at">Updated At</label>
-                </div>
+
+            </div>
+
+          </form>
+          <form class="col s12">
+            <div class="row">
+              
+            </div>
+
+          </form>
+          <form class="col s12">
+            <div class="row">
+              
+            </div>
+
+          </form>
+          <form class="col s12">
+            <div class="row">
+              
+            </div>
 
           </form>
         </div>
-              </div>
+      </div>
       </li>
     </ul>
           
@@ -225,5 +168,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>    
     <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/addInventory.js"></script>
+    <script src="./assets/js/searchInventory.js"></script>
   </body>
 </html>

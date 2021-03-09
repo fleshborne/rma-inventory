@@ -34,7 +34,7 @@ module.exports = (sequelize,DataTypes) => {
                 allowNull: false,
             }
         }),
-        Part.hasMany(models.Case_Detail, {
+        Part.hasMany(models.caseDetail, {
             foreignKey: {
                 allowNull: false,
                 key: 'Part_NumberId'

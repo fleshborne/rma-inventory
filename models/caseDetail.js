@@ -1,6 +1,6 @@
 
 module.exports = (sequelize, DataTypes) => {
- const caseDetail = sequelize.define('Case_Detail', {
+ const caseDetail = sequelize.define('caseDetail', {
   itemType: {
     type: DataTypes.STRING,
     allowNull: false,

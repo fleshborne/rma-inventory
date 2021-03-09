@@ -5,28 +5,56 @@ $('.dropdown-trigger').dropdown();
 })
 
     const callRmaInvent = () => {
-        axios.get(`/api/caseDetail`).then((items) => {
-        const $table = $('#insertInventory')
+        axios.get(`/api/Case_Detail`).then((items) => {
+        const $table = $('#insertInventory');
+
+        // must create headers dynamically at some point
+        // const $tableHeads = $('#databaseHeaders');
+        // come back to this
         console.log(items);
 
         console.log('inventory will go here');
         
-        // $table.empty();
+        $table.empty();
         items.data.forEach((item) => {
             const id = item.id;
             const itemType = item.itemType;
             const serialNumber = item.serialNumber;
             const createdAt = item.createdAt;
             const updatedAt = item.updatedAt;
-
+            const PartId = item.PartId;
+            const FaultId = item.FaultId;
+            const DispositionId = item.DispositionId;
+            
+            const headId = 'Id'
+            const headItemType = 'Item Type'
+            const headSerialNumber = 'Serial Number'
+            const headCreatedAt = 'Created At'
+            const headUpdatedAt = 'Updated At'
+            const headPartId = 'Part Id'
+            const headFaultId = 'Fault Id'
+            const headDispositionId = 'Disposition Id'
 
             $table.append(`
+            <thead>
+            <th>${headId}</th>
+            <th>${headSerialNumber}</th>
+            <th>${headItemType}</th>
+            <th>${headCreatedAt}</th>
+            <th>${headUpdatedAt}</th>
+            <th>${headPartId}</th>
+            <th>${headFaultId}</th>
+            <th>${headDispositionId}</th> 
+            </thead>
             <tr>
             <td>${id}</td>
             <td>${serialNumber}</td>
             <td>${itemType}</td>
             <td>${createdAt}</td>
             <td>${updatedAt}</td>
+            <td>${PartId}</td>
+            <td>${FaultId}</td>
+            <td>${DispositionId}</td>
             </tr>`)
         });
     }).catch((err) => {
@@ -42,21 +70,3 @@ $(document).on('click', '#viewDatabase', (event) => {
 // var instance = M.Collapsible.init(elem, {
 //   accordion: false
 // });
-
-
-            // const id = items.id;
-            // const projectName = items.projectName;
-            // const internalContact = items.internalContact;
-            // const trackingId = items.trackingId;
-            // const carrier = items.carrier;
-            // const itemValue = items.itemValue;
-            // const dateReceived = items.dateReceived;
-            // const dateTested = items.dateTested;
-            // const manufactureDate = items.manufactureDate;
-            // const dateSentManufacture = items.dateSentManufacture;
-            // const serialNumber = items.serialNumber;
-            // const reasonForReturn = items.reasonForReturn;
-            // const returnToProd = items.returnToProd;
-            // const returnToStock = items.returnToStock;
-            // const returnToManufacture=items.returnToManufacture;
-            // const repairInHouse = items.repairInHouse;
