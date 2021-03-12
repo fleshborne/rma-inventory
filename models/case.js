@@ -9,14 +9,16 @@
 
 module.exports = (sequelize, DataTypes) => {
     const Case = sequelize.define('Case', {
-    
-
-
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
-        },           
+        },
+        caseName: {
+            type: DataTypes.STRING,
+            allowNull: false,
+
+        },          
         createdAt: {
             type: DataTypes.DATE
         },

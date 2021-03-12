@@ -33,7 +33,7 @@ $('.dropdown-trigger').dropdown();
             const FaultId = item.FaultId;
             const DispositionId = item.DispositionId;
             
-            const headId = 'Id'
+            const headId = item[0].id;
             const headItemType = 'Item Type'
             const headSerialNumber = 'Serial Number'
             const headCreatedAt = 'Created At'
@@ -42,8 +42,8 @@ $('.dropdown-trigger').dropdown();
             const headFaultId = 'Fault Id'
             const headDispositionId = 'Disposition Id'
 
-            const addedToInvent = dateFns.format(createdAt, 'YY MMM D')
-            const updatedInvent = dateFns.format(updatedAt, 'YY MMM D')
+            const addedToInvent = dateFns.format(createdAt, 'MMM D, YY')
+            const updatedInvent = dateFns.format(updatedAt, 'MMM D, YY')
             $table.append(`
             <thead>
             <th>${headId}</th>
