@@ -1,5 +1,7 @@
 const addContact = () => {
-
+axios.post('/Contact', (req,res) => {
+    
+})
 }
 const addSite = () => {
 
