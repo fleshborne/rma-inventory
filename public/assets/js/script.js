@@ -33,7 +33,7 @@ $('.dropdown-trigger').dropdown();
             const FaultId = item.FaultId;
             const DispositionId = item.DispositionId;
             
-            const headId = item[0].id;
+            const headId = 'Id';
             const headItemType = 'Item Type'
             const headSerialNumber = 'Serial Number'
             const headCreatedAt = 'Created At'
@@ -75,6 +75,8 @@ $(document).on('click', '#viewDatabase', (event) => {
     callRmaInvent();
 
 })
+
+
 
 // var instance = M.Collapsible.init(elem, {
 //   accordion: false
