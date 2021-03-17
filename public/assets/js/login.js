@@ -22,7 +22,7 @@ $(document).ready(() => {
         passwordInput('');
     });
     function loginUser(email, password) {
-        $.post('/api/login', {
+        $.post('/api/user', {
             email,
             password,
         })

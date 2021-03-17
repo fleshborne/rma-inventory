@@ -1,9 +1,7 @@
 // const router = require('express').Router();
 const db = require('../models');
-const express = require('express');
-
 const router = require('express').Router();
-
+const passport = require('../config/passport');
 // Get Requests##################
 
 router.get('/Case_Detail', (req,res) => {
@@ -77,6 +75,30 @@ router.get('/User', (req,res) => {
     });
 })
 // Post Requests ##############################################
+router.post('/login', passport.authenticate('local'), function (req, res) {
+    console.log('check for invalid user' + res.message);
+    res.json(req.user);
+  });
+router.post('/signup', (req, res) => {
+    db.User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+    })
+      .then(function () {
+        //res.json(req.body);
+        //console.log('createduser' + res.body);
+        res.redirect(307, '/api/login');
+      })
+      .catch((err) => {
+        console.log('create user error' + err);
+        res.status(406).json(err);
+      });
+    // .catch((Sequelize.) => {
+    //   //console.log('create user error' + err);
+    //   res.status(401).json(UniqueConstraintError);
+    // });
+  });
 router.post('/Case_Detail', (req,res) => {
     // create, takes an argument of an object describing the item we want
     // to insert into our table. In this case we just pass in an object with a text
@@ -149,14 +171,15 @@ router.post('/Site', (req,res) => {
 router.post('/Contact', (req,res) => {
     console.log(req.body);
     db.Contact.create({
-        name: req.body.name,
-        phoneNumber: req.body.phoneNumber,
-        email: req.body.email
+        id: req.body.contactId,
+        name: req.body.contactName,
+        phoneNumber: req.body.contactPhone,
+        email: req.body.contactEmail
     }).then((response) => {
         console.log(response);
         res.json(response);
     }).catch((err) => {
-        res.status(401).json(err);
+        console.log(err);
     });
 })
 //  Put Requests ################################################
