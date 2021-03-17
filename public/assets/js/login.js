@@ -2,7 +2,7 @@ $(document).ready(() => {
     const loginForm = $('form.login');
     const emailInput = $('input#email');
     const passwordInput = $('input#password');
-    // const Alert = new Poperror();
+
 
     loginForm.on('submit', (event) => {
         console.log('i got clicked')
@@ -27,7 +27,7 @@ $(document).ready(() => {
             password,
         })
             .then(() => {
-                window.location.replace('/index');
+                window.location.href = '/';
             })
             .catch((err) => {
                 console.log(`unauthorized, ${err}`)
@@ -35,9 +35,4 @@ $(document).ready(() => {
             })
     }
 
-    // function Poperror() {
-    //     this.render = function () {
-    //         document.
-    //     }
-    // }
 })
