@@ -32,6 +32,9 @@ $('.dropdown-trigger').dropdown();
             const PartId = item.PartId;
             const FaultId = item.FaultId;
             const DispositionId = item.DispositionId;
+            const faultReason = item.Fault.reasonForReturn;
+            const dispositionAction = item.Disposition.actionTaken;
+
             
             const headId = 'Id';
             const headItemType = 'Item Type'
@@ -41,6 +44,8 @@ $('.dropdown-trigger').dropdown();
             const headPartId = 'Part Id'
             const headFaultId = 'Fault Id'
             const headDispositionId = 'Disposition Id'
+            const headFaultReason = 'Fault'
+            const headDispositionAction = 'Action Taken'
 
             const addedToInvent = dateFns.format(createdAt, 'MMM D, YY')
             const updatedInvent = dateFns.format(updatedAt, 'MMM D, YY')
@@ -54,6 +59,8 @@ $('.dropdown-trigger').dropdown();
             <th>${headDispositionId}</th>             
             <th>${headCreatedAt}</th>
             <th>${headUpdatedAt}</th>
+            <th>${headFaultReason}</th>
+            <th>${headDispositionAction}</th>
             </thead>
             <tr>
             <td>${id}</td>
@@ -64,6 +71,8 @@ $('.dropdown-trigger').dropdown();
             <td>${DispositionId}</td>            
             <td>${addedToInvent}</td>
             <td>${updatedInvent}</td>
+            <td>${faultReason}</td>
+            <td>${dispositionAction}</td>
             </tr>`)
         });
     }).catch((err) => {

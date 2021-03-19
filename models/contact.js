@@ -13,24 +13,22 @@
         },
         name: {
             type: DataTypes.STRING,
-            allowNull: false,
+            // allowNull: false,
         },
 
         phoneNumber: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
+            type: DataTypes.STRING,
+            // allowNull: false,
         },
         email : {
             type: DataTypes.STRING,
-            allowNull: false,
+            // allowNull: false,
         },
 
     });
     Contact.associate = (models) => {
         Contact.belongsTo(models.User, {
-            foreignKey: {
-                allowNull:false,
-            }
+            foreignKey: 'UserId'
         })
     }
     return Contact

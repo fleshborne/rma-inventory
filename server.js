@@ -1,22 +1,25 @@
 const express = require('express');
+const session = require('express-session');
 // const db = require('./models');
 const apiRoutes = require('./routes/api-routes');
 const htmlRoutes = require('./routes/html-routes');
-
-const app = express();
+const passport = require('./config/passport');
 
 const PORT = process.env.PORT || 8080;
 const db = require('./models');
+const app = express();
 
-// const router = express.Router();
 
-app.use(express.urlencoded({ extended: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static('public'));
-// app.use(
-//   // eslint-disable-next-line comma-dangle
-//   session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })
-// );
+app.use(
+  // eslint-disable-next-line comma-dangle
+  session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })
+);
 
 app.use('/api', apiRoutes);
 app.use('/', htmlRoutes)

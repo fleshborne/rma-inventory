@@ -174,10 +174,11 @@ router.post('/Contact', (req,res) => {
         id: req.body.contactId,
         name: req.body.contactName,
         phoneNumber: req.body.contactPhone,
-        email: req.body.contactEmail
-    }).then((response) => {
-        console.log(response);
-        res.json(response);
+        email: req.body.contactEmail,
+        userId: req.body.user.id
+    }).then((newContact) => {
+        console.log(newContact);
+        res.json(newContact);
     }).catch((err) => {
         console.log(err);
     });
