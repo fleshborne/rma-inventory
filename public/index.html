@@ -36,7 +36,7 @@
           <div class="card-action">
             <nav>
               <div class="nav-wrapper">
-                <form>
+                <form id="searchDb">
                   <div class="input-field">
                     
                     <input id="search" type="search" required>
@@ -117,12 +117,12 @@
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
           <span class="card-title">Site</span>
-          <form class="col s12">
+          <form class="col s12" id="siteForm">
             <div class="row">
-            <div class="input-field col s12">
+            <!-- <div class="input-field col s12">
               <textarea id="siteId" class="materialize-textarea"></textarea>
               <label for="textarea1">Id</label>
-            </div>
+            </div> -->
           </div>
           <div class="row">
             <div class="input-field col s12">
@@ -150,12 +150,12 @@
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
           <span class="card-title">Case</span>
-          <form class="col s12">
+          <form class="col s12" id="caseForm">
             <div class="row">
-            <div class="input-field col s12">
+            <!-- <div class="input-field col s12">
               <textarea id="caseId" class="materialize-textarea"></textarea>
               <label for="textarea1">Id</label>
-            </div>
+            </div> -->
           </div>
           <div class="row">
             <div class="input-field col s12">
@@ -171,7 +171,7 @@
           </div>
         </div>
         <div class="card-action">
-          <button class="btn waves-effect waves-light" id="caseDetailForm" type="submit" name="action">Submit
+          <button class="btn waves-effect waves-light" id="caseFormSubmit" type="submit" name="action">Submit
             <i class="material-icons right">send</i>
           </button>
         </div>
@@ -182,12 +182,12 @@
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
           <span class="card-title">Case Detail</span>
-          <form class="col s12">
+          <form class="col s12" id="caseDetailForm">
             <div class="row">
-            <div class="input-field col s12">
+            <!-- <div class="input-field col s12">
               <textarea id="caseDetailId" class="materialize-textarea"></textarea>
               <label for="textarea1">Id</label>
-            </div>
+            </div> -->
           </div>
           <div class="row">
             <div class="input-field col s12">
@@ -203,7 +203,7 @@
           </div>
         </div>
         <div class="card-action">
-          <button class="btn waves-effect waves-light" id="caseDetailForm" type="submit" name="action">Submit
+          <button class="btn waves-effect waves-light" id="caseDetailFormSubmit" type="submit" name="action">Submit
             <i class="material-icons right">send</i>
           </button>
         </div>
@@ -214,12 +214,12 @@
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
           <span class="card-title">Disposition</span>
-          <form class="col s12">
+          <form class="col s12" id="DispositionForm">
             <div class="row">
-            <div class="input-field col s12">
+            <!-- <div class="input-field col s12">
               <textarea id="dispositionId" class="materialize-textarea"></textarea>
               <label for="textarea1">Id</label>
-            </div>
+            </div> -->
           </div>
           <div class="row">
             <div class="input-field col s12">
@@ -229,7 +229,7 @@
           </div>
         </div>
         <div class="card-action">
-          <button class="btn waves-effect waves-light" type="submit" id="dispositionForm" name="action">Submit
+          <button class="btn waves-effect waves-light" type="submit" id="dispositionFormSubmit" name="action">Submit
             <i class="material-icons right">send</i>
           </button>
         </div>
@@ -240,7 +240,7 @@
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
           <span class="card-title">Fault</span>
-          <form class="col s12">
+          <form class="col s12" id="faultForm">
             <div class="row">
             <div class="input-field col s12">
               <textarea id="faultId" class="materialize-textarea"></textarea>
@@ -266,12 +266,12 @@
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
           <span class="card-title">Part</span>
-          <form class="col s12">
+          <form class="col s12" id="partForm">
             <div class="row">
-            <div class="input-field col s12">
+            <!-- <div class="input-field col s12">
               <textarea id="partId" class="materialize-textarea"></textarea>
               <label for="textarea1">Id</label>
-            </div>
+            </div> -->
           </div>
           <div class="row">
             <div class="input-field col s12">
@@ -287,7 +287,7 @@
           </div>
         </div>
         <div class="card-action">
-          <button class="btn waves-effect waves-light" id="partForm" type="submit" name="action">Submit
+          <button class="btn waves-effect waves-light" id="partFormSubmit" type="submit" name="action">Submit
             <i class="material-icons right">send</i>
           </button>
         </div>
@@ -298,12 +298,12 @@
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
           <span class="card-title">Supplier</span>
-          <form class="col s12">
+          <form class="col s12" id="supplierForm">
             <div class="row">
-            <div class="input-field col s12">
+            <!-- <div class="input-field col s12">
               <textarea id="supplierId" class="materialize-textarea"></textarea>
               <label for="textarea1">Id</label>
-            </div>
+            </div> -->
           </div>
           <div class="row">
             <div class="input-field col s12">
@@ -312,7 +312,7 @@
             </div>
           </div>
         <div class="card-action">
-          <button class="btn waves-effect waves-light" type="submit" id="supplierForm" name="action">Submit
+          <button class="btn waves-effect waves-light" type="submit" id="supplierFormSubmit" name="action">Submit
             <i class="material-icons right">send</i>
           </button>
         </div>
