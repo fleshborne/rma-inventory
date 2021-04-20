@@ -1,3 +1,8 @@
+// all functions for adding to singular tables,
+// maybe need separate page for join tables
+
+
+
 
 
  const addContact = () => {
@@ -19,7 +24,8 @@
         }
         // JSON.stringify(newContact);
         console.log(newContact);
-        axios.post('/api/Contact', newContact).then((res) => {
+        axios.post('/api/Contact', newContact)
+        .then((res) => {
             console.log(res);
             console.log('New Contact added')
         }).catch((err) => {
@@ -27,7 +33,28 @@
         });
     }    
 const addSite = () => {
+    const siteName = $('#siteName');
+    const siteLocation = $('#siteLocation');
+    if (!siteName.val().trim() || !siteLocation.val().trim()) {
+        console.log('Please fill out the Site Information');
+        return;
+    }
 
+    const newSite = {
+        siteName: siteName.val().trim(),
+        siteLocation: siteLocation.val().trim()
+    }
+    console.log(newSite);
+
+    axios.post('/api/Site', newSite)
+    .then((res) => {
+        console.log(res);
+        console.log('New Site Added');
+    }).catch((err) => {
+        console.log(err);
+    })
+
+ 
 }
 const addCase = () => {
     
@@ -36,31 +63,87 @@ const addCaseDetail = () => {
 
 }
 const addDisposition = () => {
+    const actionTaken = $('#dispositionActionTaken');
+    
+    if (!actionTaken.val().trim()) {
+        console.log('What action was taken?')
+        return;
+    }
 
+    const newActionTaken = {
+        actionTaken: actionTaken.val().trim()
+    }
+    // console.log(actionTaken);
+    axios.post('/api/Disposition', newActionTaken)
+    .then((res)=> {
+        console.log(res);
+        console.log('New Disposition Added')
+    }).catch((err) => {
+        console.log(err);
+    })
 }
 const addFault = () => {
-    const reasonForReturn = $('#reasonForReturn');
+    const reasonForReturn = $('#faultReason');
     if (!reasonForReturn.val().trim()) {
         console.log('please enter a reason')
         return;
     }
-    
-    console.log(`the reason is: ${reasonForReturn}`)
-    axios.post('/api/Fault', reasonForReturn)
-    .then((req,res) => {
-        console.log(res);
-        res.json(reasonForReturn);
 
+    const newReasonForReturn = {
+        reasonForReturn : reasonForReturn.val().trim()
+    }
+    console.log(newReasonForReturn);
+    console.log(`the reason is: ${reasonForReturn}`)
+    axios.post('/api/Fault', newReasonForReturn)
+    .then((res) => {
+        console.log(res);
+        console.log('New Fault Added.')
     })
     .catch((err) => {
         res.status(401).json(err);
     })
 }
 const addPart = () => {
+    const partType = $('#partPartType');
+    const serialNumber = $('#partSerialNumber');
 
+    if(!partType.val().trim() || !serialNumber.val().trim()) {
+        console.log('please add required info for part submission')
+        return;
+    }
+
+    const newPart = {
+        partType : partType.val().trim(),
+        serialNumber : serialNumber.val().trim()
+    }
+
+    axios.post('/api/Part', newPart)
+    .then((res) => {
+        console.log(res)
+        console.log(`New Part: ${newPart}, was added`);
+    })
+    .catch((err) => {
+        console.log(err);
+    })
 }
 const addSupplier = () => {
+    const name = $('#supplierName');
+    if(!name.val().trim()){
+        console.log('Please enter the new Supplier')
+        return;
+    }
 
+    const newSupplier = {
+        name : name.val().trim()
+    };
+
+    axios.post('/api/Supplier', newSupplier)
+    .then((res) => {
+        console.log(res)
+        console.log('New Supplier has been added')
+    }).catch((err) => {
+        console.log(err);
+    })
 }
 
 $('#contactForm').on('submit', (event) => {
@@ -75,4 +158,19 @@ $('#faultForm').on('submit', (event) => {
 $('#siteForm').on('submit', (event) => {
     event.preventDefault();
     addSite();
+})
+
+$('#dispositionForm').on('submit', (event) => {
+    event.preventDefault();
+    addDisposition();
+})
+
+$('#partForm').on('submit', (event) => {
+    event.preventDefault();
+    addPart();
+})
+
+$('#supplierForm').on('submit', (event) => {
+    event.preventDefault();
+    addSupplier();
 })

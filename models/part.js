@@ -30,9 +30,7 @@ module.exports = (sequelize,DataTypes) => {
     //         onDelete: 'cascade',
     //     })
         Part.belongsTo(models.Supplier, {
-            foreignKey: {
-                allowNull: false,
-            }
+            foreignKey: 'SupplierId'
         }),
         Part.hasMany(models.caseDetail, {
             foreignKey: {

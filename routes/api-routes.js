@@ -117,14 +117,24 @@ router.post('/Case_Detail', (req,res) => {
 })
 router.post('/Part', (req,res) => {
     console.log(req.body);
-    db.Post.create({
+    db.Part.create({
         partType: req.body.partType,
         serialNumber: req.body.serialNumber
     }).then((response) => {
         res.json(response)
     }).catch((err) => {
         res.status(401).json(err);
-    })
+    });
+})
+router.post('/Supplier', (req,res) => {
+    console.log(req.body);
+    db.Supplier.create({
+        name: req.body.name
+    }).then((response) => {
+        res.json(response)
+    }).catch((err) => {
+        res.status(401).json(err)
+    });
 })
 router.post('/Fault', (req,res) => {
     console.log(req.body);
@@ -138,7 +148,7 @@ router.post('/Fault', (req,res) => {
 })
 router.post('/Disposition', (req,res) => {
     console.log(req.body);
-    db.Post.create({
+    db.Disposition.create({
      actionTaken: req.body.actionTaken
     }).then((response) => {
         res.json(response)
@@ -160,7 +170,7 @@ router.post('/Site', (req,res) => {
     console.log(req.body);
     db.Site.create({
         siteName: req.body.siteName,
-        location: req.body.location
+        siteLocation: req.body.siteLocation
     }).then((response) => {
         console.log(response);
         res.json(response);
