@@ -171,11 +171,11 @@ router.post('/Site', (req,res) => {
 router.post('/Contact', (req,res) => {
     console.log(req.body);
     db.Contact.create({
-        id: req.body.contactId,
+        // id: req.body.contactId,
         name: req.body.contactName,
         phoneNumber: req.body.contactPhone,
         email: req.body.contactEmail,
-        userId: req.body.user.id
+        user: req.body.user
     }).then((newContact) => {
         console.log(newContact);
         res.json(newContact);
