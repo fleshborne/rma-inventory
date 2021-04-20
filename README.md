@@ -24,7 +24,7 @@ WHEN the user runs the app THEN said user with have CRUD capability with the RMA
 MIT
 
 # TESTS
-![test picture](public\assets\images\rmaMDimage.png)
+![test picture](https://gyazo.com/03922d2f01287c4571e2a997ae67f5a0.png)
 
 # SOURCES 
 []()
