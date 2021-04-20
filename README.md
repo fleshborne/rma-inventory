@@ -31,11 +31,15 @@ MIT
 
 
 # CONTRIBUTIONS 
-
+Blake Thompson 
+<br/>
 ![profilePicture](https://avatars.githubusercontent.com/u/62081154?v=4.png)
-Blake Thompson [![built-with-swag](https://ForTheBadge.com/images/badges/built-with-swag.svg)](https://GitHub.com/Naereen/)
+<br/>
+[![built-with-swag](https://ForTheBadge.com/images/badges/built-with-swag.svg)](https://GitHub.com/Naereen/)
 
 # CONTACT 
-[![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://GitHub.com/fleshborne)
 Blakeathompson94@gmail.com
+<br/>
+[![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://GitHub.com/fleshborne)
+
 
