@@ -1,10 +1,6 @@
 // all functions for adding to singular tables,
 // maybe need separate page for join tables
 
-
-
-
-
  const addContact = () => {
         // const contactId = $('#contactId')
         const contactName = $('#contactName')
@@ -146,6 +142,42 @@ const addSupplier = () => {
     })
 }
 
+// Code section for dropdown selection 
+
+const chooseSite = () => {
+    
+    const $siteSelect = $('#insertSite');
+    $siteSelect.empty();
+    axios.get('/api/Site').then((sites) => {
+        console.log(sites);
+        // for (let i = 0; i < sites.length; i++) {
+        //     const siteName = site.siteName;
+        //     $siteSelect.append(`
+        //      <li id="siteName"> ${siteName} <li/>
+        //     `)    
+                
+        //      const siteNameSelected = $('#siteName').val();
+        //      console.log(siteNameSelected);
+        // }
+
+        sites.data.map((site) => {
+            const siteName = site.siteName;
+
+            $siteSelect.append(`
+            <li id="siteName"> ${siteName} <li/>
+            `)    
+            
+            const siteNameSelected = $('#siteName').val();
+            console.log(siteNameSelected);
+        })
+    }).catch((err) => {
+        console.log(err);
+    })
+
+
+}
+
+// Form submissions
 $('#contactForm').on('submit', (event) => {
     event.preventDefault();
     addContact();
@@ -173,4 +205,9 @@ $('#partForm').on('submit', (event) => {
 $('#supplierForm').on('submit', (event) => {
     event.preventDefault();
     addSupplier();
+})
+// Click Handlers for dropdown selections
+$('#chooseSite').on('click', (event) => {
+    event.preventDefault();
+    chooseSite();
 })
