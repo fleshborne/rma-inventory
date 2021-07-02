@@ -1,6 +1,15 @@
 // all functions for adding to singular tables,
 // maybe need separate page for join tables
-
+$(document).ready(() => {
+    //     // construct a moment object with UTC-based input
+    // const moment = moment.utc('2015-01-01 00:00:00');
+    
+    // // convert using the TZDB identifier for US Central time
+    // moment().format('LT');  
+    $('.collapsible').collapsible();
+    $('.dropdown-trigger btn').dropdown();
+    })
+    
  const addContact = () => {
         // const contactId = $('#contactId')
         const contactName = $('#contactName')
@@ -144,38 +153,44 @@ const addSupplier = () => {
 
 // Code section for dropdown selection 
 
-const chooseSite = () => {
-    
-    const $siteSelect = $('#insertSite');
-    $siteSelect.empty();
-    axios.get('/api/Site').then((sites) => {
-        console.log(sites);
-        // for (let i = 0; i < sites.length; i++) {
-        //     const siteName = site.siteName;
-        //     $siteSelect.append(`
-        //      <li id="siteName"> ${siteName} <li/>
-        //     `)    
-                
-        //      const siteNameSelected = $('#siteName').val();
-        //      console.log(siteNameSelected);
-        // }
+async function chooseSite() {
 
-        sites.data.map((site) => {
-            const siteName = site.siteName;
+    const $siteSelect = $('#dropdown1');
+    
+    $siteSelect.empty();
+    await axios.get('/api/Site').then((sites) => {
+    console.log(sites);
+    sites.data.map((site) => {
+        // const {siteName} = site.data.siteName;
+        // const {siteLocation} = site.data.siteLocation;
+        console.log(site.siteName, site.siteLocation);
+        const siteInfo = [site.siteName, site.siteLocation];
+        console.log(siteInfo);
+        
 
             $siteSelect.append(`
-            <li id="siteName"> ${siteName} <li/>
+            
+            <li id="siteInfo"><i class="material-icons">home</i> ${siteInfo} <li/>
+            
             `)    
             
-            const siteNameSelected = $('#siteName').val();
-            console.log(siteNameSelected);
+          
         })
     }).catch((err) => {
         console.log(err);
-    })
+    });
 
+    // selectSite(siteName, siteLocation);
+};
 
-}
+// async function selectSite(siteName, siteLocation) {
+//     await siteName;
+//     await siteLocation;
+//     console.log(siteName);
+//     console.log(siteLocation);
+//     // let siteNameSelected = siteName;
+//     console.log(siteNameSelected);
+// };
 
 // Form submissions
 $('#contactForm').on('submit', (event) => {
@@ -211,3 +226,10 @@ $('#chooseSite').on('click', (event) => {
     event.preventDefault();
     chooseSite();
 })
+// $('#siteName').on('click', (event, siteName) => {
+//     event.preventDefault();
+//     console.log(`${siteName}`);
+//     // chooseSite();
+//     // let siteNameSelected = $('#siteName').val().trim();
+//     // console.log(siteNameSelected);
+// })

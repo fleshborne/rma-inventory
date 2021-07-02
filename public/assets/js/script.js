@@ -6,7 +6,6 @@ $(document).ready(() => {
 
 // // convert using the TZDB identifier for US Central time
 // moment().format('LT');  
-
 $('.collapsible').collapsible();
 $('.dropdown-trigger').dropdown();
 })
