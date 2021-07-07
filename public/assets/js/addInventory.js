@@ -155,7 +155,7 @@ const addSupplier = () => {
 
 async function chooseSite() {
 
-    const $siteSelect = $('#dropdown1');
+    const $siteSelect = $('#insertSite');
     
     $siteSelect.empty();
     await axios.get('/api/Site').then((sites) => {
@@ -174,12 +174,12 @@ async function chooseSite() {
             
             `)    
             
-          
+          dropDownResults(siteInfo);
         })
     }).catch((err) => {
         console.log(err);
     });
-
+    
     // selectSite(siteName, siteLocation);
 };
 
@@ -226,10 +226,14 @@ $('#chooseSite').on('click', (event) => {
     event.preventDefault();
     chooseSite();
 })
-// $('#siteName').on('click', (event, siteName) => {
-//     event.preventDefault();
-//     console.log(`${siteName}`);
-//     // chooseSite();
-//     // let siteNameSelected = $('#siteName').val().trim();
-//     // console.log(siteNameSelected);
-// })
+
+const dropDownResults = (siteInfo) => {
+$('#dropdown1').on('click', (event) => {
+    event.preventDefault();
+    $('.dropdown-trigger').dropdown();
+    console.log(`${siteInfo}`);
+    // chooseSite();
+    // let siteNameSelected = $('#siteName').val().trim();
+    // console.log(siteNameSelected);
+})
+}
