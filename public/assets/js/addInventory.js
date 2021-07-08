@@ -1,4 +1,6 @@
 // all functions for adding to singular tables,
+
+
 // maybe need separate page for join tables
 $(document).ready(() => {
     //     // construct a moment object with UTC-based input
@@ -119,7 +121,7 @@ const addPart = () => {
 
     const newPart = {
         partType : partType.val().trim(),
-        serialNumber : serialNumber.val().trim()
+        serialNumber : serialNumber.val().trim() 
     }
 
     axios.post('/api/Part', newPart)
@@ -183,6 +185,27 @@ async function chooseSite() {
     // selectSite(siteName, siteLocation);
 };
 
+async function chooseContact() {
+    const $chooseContact = $('#chooseContact')
+    const $insertContact = $('#findContact')
+    $chooseContact.empty();
+    $insertContact.empty();
+
+    await axios.get('/api/Contact').then((contacts) => {
+        console.log(contacts);
+        contacts.data.map((contact) => {
+            console.log(contact)
+            const contactInfo = contact.name;
+            console.log(contactInfo);
+            $insertContact.append((`<option value='${contactInfo}'>${contactInfo}</option>`));
+            selectContactResults(contactInfo);
+        })
+    })
+    .catch((err) =>{
+        console.log(err);
+    })
+}
+
 // async function selectSite(siteName, siteLocation) {
 //     await siteName;
 //     await siteLocation;
@@ -221,10 +244,16 @@ $('#supplierForm').on('submit', (event) => {
     event.preventDefault();
     addSupplier();
 })
+
+
 // Click Handlers for dropdown selections
 $('#chooseSite').on('click', (event) => {
     event.preventDefault();
     chooseSite();
+})
+$('#findContact').on('click', (event) => {
+    event.preventDefault();
+    chooseContact();
 })
 
 const dropDownResults = (siteInfo) => {
@@ -236,4 +265,12 @@ $('#dropdown1').on('click', (event) => {
     // let siteNameSelected = $('#siteName').val().trim();
     // console.log(siteNameSelected);
 })
+}
+
+const selectContactResults = (contactInfo) => {
+    $('#chooseContact').on('click', (event) => {
+        event.preventDefault();
+        console.log(contactInfo);
+    
+    })
 }

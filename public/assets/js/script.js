@@ -8,6 +8,8 @@ $(document).ready(() => {
 // moment().format('LT');  
 $('.collapsible').collapsible();
 $('.dropdown-trigger').dropdown();
+$('select').formSelect();
+// $('select').material_select();
 })
 
     const callRmaInvent = () => {
