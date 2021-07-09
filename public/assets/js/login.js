@@ -1,17 +1,16 @@
 $(document).ready(() => {
-    const loginForm = $('form.login');
-    const emailInput = $('input#email');
-    const passwordInput = $('input#password');
-
+    const loginForm = $('.login');
+    const emailInput = $('#email-input');
+    const passwordInput = $('#password-input');
+    const Alert = new Poperror();
 
     loginForm.on('submit', (event) => {
-        console.log('i got clicked')
         event.preventDefault();
-        
         const userData = {
             email: emailInput.val().trim(),
             password: passwordInput.val().trim(),
         }
+        console.log(userData);
 
         if (!userData.email || !userData.password) {
             return;
@@ -19,23 +18,23 @@ $(document).ready(() => {
 
         loginUser(userData.email, userData.password);
         emailInput.val('');
-        passwordInput('');
+        passwordInput.val('');
     });
     function loginUser(email, password) {
-        $.post('/api/user', {
+        console.log(`${email}, ${password}`)
+        $.post('/api/login', {
             email,
             password,
         })
             .then(() => {
-                window.location.href = '/';
+                console.log('login successful with email' + email + password)
+                window.location.replace('/index.html');
             })
             .catch((err) => {
                 console.log(`unauthorized, ${err}`)
                 Alert.render();
             })
     }
-
-})
 function Poperror() {
     // eslint-disable-next-line func-names
     // eslint-disable-next-line spaced-comment
@@ -56,6 +55,8 @@ function Poperror() {
         '<button onclick="boxclose()">OK</button>';
     };
   }
+})
+
   function boxclose() {
     console.log('in boxclose');
     document.getElementById('dialogbox').style.display = 'none';

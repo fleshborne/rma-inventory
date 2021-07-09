@@ -1,6 +1,6 @@
 // const router = require('express').Router();
-const db = require('../models');
 const router = require('express').Router();
+const db = require('../models');
 const passport = require('../config/passport');
 // Get Requests##################
 
@@ -66,18 +66,25 @@ router.get('/Contact', (req,res) => {
         res.status(401).json(err);
     });
 })
-router.get('/User', (req,res) => {
-    db.User.findAll().then((response)  => {
-        console.log(response);
-        res.json(response);
-    }).catch((err) => {
-        res.status(401).json(err);
+router.get('/user_data', (req,res) => {
+    console.log(req);
+if (!req.user) {
+    // if user isnt logged in, send back an empty object
+    res.json({});
+} else {
+    res.json({
+        userName: req.user.username,
+        email:req.user.email,
+        id: req.user.id,
     });
-})
+}
+});
 // Post Requests ##############################################
 router.post('/login', passport.authenticate('local'), function (req, res) {
     console.log('check for invalid user' + res.message);
+    console.log(req.user);
     res.json(req.user);
+
   });
 router.post('/signup', (req, res) => {
     db.User.create({
@@ -159,11 +166,15 @@ router.post('/Disposition', (req,res) => {
 router.post('/Case', (req,res) => {
     console.log(req.body);
     db.Case.create({
-        caseName: req.body.caseName
-    }).then((response) => {
-        res.json(response)
+        caseName: req.body.caseName,
+        userId: req.body.userId,
+        siteId: req.body.siteId,
+        contactId: req.body.contactId
+    }).then((newCase) => {
+        console.log(newCase);
+        res.json(newCase)
     }).catch((err) => {
-        res.status(401).json(err);
+        console.log(err);
     })
 })
 router.post('/Site', (req,res) => {

@@ -1,6 +1,4 @@
 // all functions for adding to singular tables,
-
-
 // maybe need separate page for join tables
 $(document).ready(() => {
     //     // construct a moment object with UTC-based input
@@ -64,7 +62,28 @@ const addSite = () => {
  
 }
 const addCase = () => {
+    const caseName = $('#caseName');
+    const userId = $('#caseUserId');
+    const siteId = $('#insertSite');
+    const contactId = $('#insertContact');
     
+    if(!caseName.val().trim() || !userId.val().trim() || !siteId.val() || !contactId.val()){
+        console.log('Please enter all of the Case information')
+        return;
+    }
+
+    const newCase = {
+        caseName: caseName.val().trim(),
+        userId: userId.val().trim(),
+        siteId: siteId.val(),
+        contactId: contactId.val()
+    };
+    
+    axios.post('/api/Case', newCase).then((res) => {
+        console.log('New Case has been added')
+    }).catch((err) => {
+        console.log(err);
+    });
 }
 const addCaseDetail = () => {
 
@@ -154,66 +173,58 @@ const addSupplier = () => {
 }
 
 // Code section for dropdown selection 
+// Need to finda reliable solution; added to Todos
+// async function chooseSite() {
 
-async function chooseSite() {
-
-    const $siteSelect = $('#insertSite');
+//     const $siteSelect = $('#insertSite');
     
-    $siteSelect.empty();
-    await axios.get('/api/Site').then((sites) => {
-    console.log(sites);
-    sites.data.map((site) => {
-        // const {siteName} = site.data.siteName;
-        // const {siteLocation} = site.data.siteLocation;
-        console.log(site.siteName, site.siteLocation);
-        const siteInfo = [site.siteName, site.siteLocation];
-        console.log(siteInfo);
+//     $siteSelect.empty();
+//     await axios.get('/api/Site').then((sites) => {
+//     console.log(sites);
+//     sites.data.map((site) => {
+//         // const {siteName} = site.data.siteName;
+//         // const {siteLocation} = site.data.siteLocation;
+//         console.log(site.siteName, site.siteLocation);
+//         const siteInfo = [site.siteName, site.siteLocation];
+//         console.log(siteInfo);
         
 
-            $siteSelect.append(`
+//             $siteSelect.append(`
             
-            <li id="siteInfo"><i class="material-icons">home</i> ${siteInfo} <li/>
+//             <li id="siteInfo"><i class="material-icons">home</i> ${siteInfo} <li/>
             
-            `)    
+//             `)    
             
-          dropDownResults(siteInfo);
-        })
-    }).catch((err) => {
-        console.log(err);
-    });
+//           dropDownResults(siteInfo);
+//         })
+//     }).catch((err) => {
+//         console.log(err);
+//     });
     
-    // selectSite(siteName, siteLocation);
-};
-
-async function chooseContact() {
-    const $chooseContact = $('#chooseContact')
-    const $insertContact = $('#findContact')
-    $chooseContact.empty();
-    $insertContact.empty();
-
-    await axios.get('/api/Contact').then((contacts) => {
-        console.log(contacts);
-        contacts.data.map((contact) => {
-            console.log(contact)
-            const contactInfo = contact.name;
-            console.log(contactInfo);
-            $insertContact.append((`<option value='${contactInfo}'>${contactInfo}</option>`));
-            selectContactResults(contactInfo);
-        })
-    })
-    .catch((err) =>{
-        console.log(err);
-    })
-}
-
-// async function selectSite(siteName, siteLocation) {
-//     await siteName;
-//     await siteLocation;
-//     console.log(siteName);
-//     console.log(siteLocation);
-//     // let siteNameSelected = siteName;
-//     console.log(siteNameSelected);
+//     // selectSite(siteName, siteLocation);
 // };
+
+// async function chooseContact() {
+//     const $chooseContact = $('#chooseContact')
+//     const $insertContact = $('#findContact')
+//     $chooseContact.empty();
+//     $insertContact.empty();
+
+//     await axios.get('/api/Contact').then((contacts) => {
+//         console.log(contacts);
+//         contacts.data.map((contact) => {
+//             console.log(contact)
+//             const contactInfo = contact.name;
+//             console.log(contactInfo);
+//             $insertContact.append((`<option value='${contactInfo}'>${contactInfo}</option>`));
+//             selectContactResults(contactInfo);
+//         })
+//     })
+//     .catch((err) =>{
+//         console.log(err);
+//     })
+// }
+
 
 // Form submissions
 $('#contactForm').on('submit', (event) => {
@@ -245,32 +256,36 @@ $('#supplierForm').on('submit', (event) => {
     addSupplier();
 })
 
-
-// Click Handlers for dropdown selections
-$('#chooseSite').on('click', (event) => {
+$('#caseForm').on('submit', (event) => {
     event.preventDefault();
-    chooseSite();
-})
-$('#findContact').on('click', (event) => {
-    event.preventDefault();
-    chooseContact();
+    addCase();
 })
 
-const dropDownResults = (siteInfo) => {
-$('#dropdown1').on('click', (event) => {
-    event.preventDefault();
-    $('.dropdown-trigger').dropdown();
-    console.log(`${siteInfo}`);
-    // chooseSite();
-    // let siteNameSelected = $('#siteName').val().trim();
-    // console.log(siteNameSelected);
-})
-}
+// // Click Handlers for dropdown selections
+// $('#chooseSite').on('click', (event) => {
+//     event.preventDefault();
+//     chooseSite();
+// })
+// $('#findContact').on('click', (event) => {
+//     event.preventDefault();
+//     chooseContact();
+// })
 
-const selectContactResults = (contactInfo) => {
-    $('#chooseContact').on('click', (event) => {
-        event.preventDefault();
-        console.log(contactInfo);
+// const dropDownResults = (siteInfo) => {
+// $('#dropdown1').on('click', (event) => {
+//     event.preventDefault();
+//     $('.dropdown-trigger').dropdown();
+//     console.log(`${siteInfo}`);
+//     // chooseSite();
+//     // let siteNameSelected = $('#siteName').val().trim();
+//     // console.log(siteNameSelected);
+// })
+// }
+
+// const selectContactResults = (contactInfo) => {
+//     $('#chooseContact').on('click', (event) => {
+//         event.preventDefault();
+//         console.log(contactInfo);
     
-    })
-}
+//     })
+// }

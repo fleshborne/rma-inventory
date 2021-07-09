@@ -10,8 +10,6 @@ $('.collapsible').collapsible();
 $('.dropdown-trigger').dropdown();
 $('select').formSelect();
 // $('select').material_select();
-})
-
     const callRmaInvent = () => {
         axios.get(`/api/Case_Detail`).then((items) => {
         const $table = $('#insertInventory');
@@ -85,9 +83,36 @@ $(document).on('click', '#viewDatabase', (event) => {
     callRmaInvent();
 
 })
+const insertSite = $('#insertSite');
+    $.get('/api/Site').then((data) => {
+        console.log(data);
+        data.forEach((site) => {
+            const newSite = $('<option>').attr('value', site.id).text(site.siteName);
+            insertSite.append(newSite);
+        });
+        insertSite.formSelect();
+    })
+const insertContact = $('#insertContact');
+    $.get('/api/Contact').then((data) => {
+        console.log(data);
+        data.forEach((contact) => {
+            const newContact = $('<option>').attr('value', contact.id).text(contact.name);
+            insertContact.append(newContact);
+        });
+        insertContact.formSelect();
+    })
 
+    $.get('/api/user_data').then((data) => {
+        $('.member-name').text(data.username);
+        console.log(data);
+        // console.log(data.id);
+        // const dataId = data.id;
+        // sessionStorage.setItem('id', JSON.stringify(dataId));
+        // console.log(dataId);
 
-
+    })
 // var instance = M.Collapsible.init(elem, {
 //   accordion: false
 // });
+
+})

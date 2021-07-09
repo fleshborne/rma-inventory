@@ -4,7 +4,7 @@ $(document).ready(() => {
     const userNameInput = $('#username-input');
     const emailInput = $('#email-input');
     const passwordInput = $('#password-input');
-    const confirmpasswordInput = $('#password-input2');
+    const confirmPasswordInput = $('#password-input2');
     const Alert = new Poperror();
   
     // When the signup button is clicked, we validate the email and password are not blank
@@ -15,11 +15,11 @@ $(document).ready(() => {
         username: userNameInput.val().trim(),
         email: emailInput.val().trim(),
         password: passwordInput.val().trim(),
-        confirmpassword: confirmpasswordInput.val().trim(),
+        confirmPassword: confirmPasswordInput.val().trim(),
       };
       console.log('OVJ', userData);
       // If we have an email and password, run the signUpUser function
-      if (userData.password !== userData.confirmpassword) {
+      if (userData.password !== userData.confirmPassword) {
         const errorstr = 'Password do not match';
         Alert.render(errorstr);
       } else {
@@ -28,7 +28,7 @@ $(document).ready(() => {
       emailInput.val('');
       passwordInput.val('');
       userNameInput.val('');
-      confirmpasswordInput.val('');
+      confirmPasswordInput.val('');
     });
   
     // Does a post to the signup route. If successful, we are redirected to the members page
@@ -38,11 +38,11 @@ $(document).ready(() => {
       $.post('/api/signup', { username, email, password })
         .then((res) => {
           //console.log('res' + res);
-          window.location.replace('/members');
+          window.location.replace('/index');
           // If there's an error, handle it by throwing up a bootstrap alert
         })
         .catch((err) => {
-          console.log('create user error' + err);
+          console.log(`create user error + ${err}`);
           // eslint-disable-next-line operator-linebreak
           const errorstr =
             'Username and Email Exists, SignUp with a new Username and Email';
