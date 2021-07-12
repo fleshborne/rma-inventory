@@ -73,7 +73,7 @@ if (!req.user) {
     res.json({});
 } else {
     res.json({
-        userName: req.user.username,
+        username: req.user.username,
         email:req.user.email,
         id: req.user.id,
     });

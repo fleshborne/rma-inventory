@@ -28,7 +28,7 @@ $(document).ready(() => {
         })
             .then(() => {
                 console.log('login successful with email' + email + password)
-                window.location.replace('/index.html');
+                window.location.replace('/');
             })
             .catch((err) => {
                 console.log(`unauthorized, ${err}`)
