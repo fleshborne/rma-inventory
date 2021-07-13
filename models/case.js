@@ -43,27 +43,6 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull : false
             }
         })
-        
-        // Case.belongsTo(models.User, {
-        //     foreignKey: {
-        //         allowNull: false,
-        //     },
-        //     // through: 'Case_Detail',
-        // });
-        // Case.belongsToMany(models.Site, {
-        //     // foreignKey: {
-        //     //     allowNull: false
-        //     // },
-        //     through: 'Case_Detail',
-        // })
-        // Case.hasMany(models.Contact, {
-        //     foreignKey : {
-        //         allowNull: false,
-        //     }
-        // })
-        // Case.belongsToMany(models.serialNumber, {
-        //     through: 'Case_Detail',
-        // })
     }
     return Case;
 }

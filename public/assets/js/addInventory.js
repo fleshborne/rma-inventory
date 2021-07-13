@@ -22,12 +22,10 @@ $(document).ready(() => {
         }
           
         const newContact = {
-            // id: contactId.val().trim(),
             contactName: contactName.val().trim(),
             contactPhone: contactPhone.val().trim(),
             contactEmail: contactEmail.val().trim()
         }
-        // JSON.stringify(newContact);
         console.log(newContact);
         axios.post('/api/Contact', newContact)
         .then((res) => {
@@ -63,24 +61,27 @@ const addSite = () => {
 }
 const addCase = () => {
     const caseName = $('#caseName');
-    const userId = $('#caseUserId');
-    const siteId = $('#insertSite');
-    const contactId = $('#insertContact');
+    const UserId = sessionStorage.getItem('id');
+    const SiteId = $('#insertSite').attr('id');
+    const ContactId = $('#insertContact').attr('id');
     
-    if(!caseName.val().trim() || !userId.val().trim() || !siteId.val() || !contactId.val()){
+    
+
+    if(!caseName.val().trim() || !UserId || !SiteId || !ContactId){
         console.log('Please enter all of the Case information')
         return;
     }
 
     const newCase = {
         caseName: caseName.val().trim(),
-        userId: userId.val().trim(),
-        siteId: siteId.val(),
-        contactId: contactId.val()
+        UserId: UserId,
+        SiteId: SiteId,
+        ContactId: ContactId,
     };
-    
+    console.log(newCase);
     axios.post('/api/Case', newCase).then((res) => {
-        console.log('New Case has been added')
+        console.log('New Case has been added' + res);
+
     }).catch((err) => {
         console.log(err);
     });
@@ -99,7 +100,6 @@ const addDisposition = () => {
     const newActionTaken = {
         actionTaken: actionTaken.val().trim()
     }
-    // console.log(actionTaken);
     axios.post('/api/Disposition', newActionTaken)
     .then((res)=> {
         console.log(res);
@@ -171,61 +171,6 @@ const addSupplier = () => {
         console.log(err);
     })
 }
-
-// Code section for dropdown selection 
-// Need to finda reliable solution; added to Todos
-// async function chooseSite() {
-
-//     const $siteSelect = $('#insertSite');
-    
-//     $siteSelect.empty();
-//     await axios.get('/api/Site').then((sites) => {
-//     console.log(sites);
-//     sites.data.map((site) => {
-//         // const {siteName} = site.data.siteName;
-//         // const {siteLocation} = site.data.siteLocation;
-//         console.log(site.siteName, site.siteLocation);
-//         const siteInfo = [site.siteName, site.siteLocation];
-//         console.log(siteInfo);
-        
-
-//             $siteSelect.append(`
-            
-//             <li id="siteInfo"><i class="material-icons">home</i> ${siteInfo} <li/>
-            
-//             `)    
-            
-//           dropDownResults(siteInfo);
-//         })
-//     }).catch((err) => {
-//         console.log(err);
-//     });
-    
-//     // selectSite(siteName, siteLocation);
-// };
-
-// async function chooseContact() {
-//     const $chooseContact = $('#chooseContact')
-//     const $insertContact = $('#findContact')
-//     $chooseContact.empty();
-//     $insertContact.empty();
-
-//     await axios.get('/api/Contact').then((contacts) => {
-//         console.log(contacts);
-//         contacts.data.map((contact) => {
-//             console.log(contact)
-//             const contactInfo = contact.name;
-//             console.log(contactInfo);
-//             $insertContact.append((`<option value='${contactInfo}'>${contactInfo}</option>`));
-//             selectContactResults(contactInfo);
-//         })
-//     })
-//     .catch((err) =>{
-//         console.log(err);
-//     })
-// }
-
-
 // Form submissions
 $('#contactForm').on('submit', (event) => {
     event.preventDefault();
@@ -260,32 +205,3 @@ $('#caseForm').on('submit', (event) => {
     event.preventDefault();
     addCase();
 })
-
-// // Click Handlers for dropdown selections
-// $('#chooseSite').on('click', (event) => {
-//     event.preventDefault();
-//     chooseSite();
-// })
-// $('#findContact').on('click', (event) => {
-//     event.preventDefault();
-//     chooseContact();
-// })
-
-// const dropDownResults = (siteInfo) => {
-// $('#dropdown1').on('click', (event) => {
-//     event.preventDefault();
-//     $('.dropdown-trigger').dropdown();
-//     console.log(`${siteInfo}`);
-//     // chooseSite();
-//     // let siteNameSelected = $('#siteName').val().trim();
-//     // console.log(siteNameSelected);
-// })
-// }
-
-// const selectContactResults = (contactInfo) => {
-//     $('#chooseContact').on('click', (event) => {
-//         event.preventDefault();
-//         console.log(contactInfo);
-    
-//     })
-// }

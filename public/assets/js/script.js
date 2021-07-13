@@ -1,11 +1,4 @@
-// const moment = require("moment");
-
 $(document).ready(() => {
-//     // construct a moment object with UTC-based input
-// const moment = moment.utc('2015-01-01 00:00:00');
-
-// // convert using the TZDB identifier for US Central time
-// moment().format('LT');  
 $('.collapsible').collapsible();
 $('.dropdown-trigger').dropdown();
 $('select').formSelect();
@@ -14,9 +7,6 @@ $('select').formSelect();
         axios.get(`/api/Case_Detail`).then((items) => {
         const $table = $('#insertInventory');
 
-        // must create headers dynamically at some point
-        // const $tableHeads = $('#databaseHeaders');
-        // come back to this
         console.log(items);
 
         console.log('inventory will go here');
@@ -102,12 +92,11 @@ const insertContact = $('#insertContact');
         insertContact.formSelect();
     })
 
-    $.get('/api/user_data').then((data) => {
-        $('.member-name').text(data.username);
-        console.log(data);
-        // console.log(data.id);
-        // const dataId = data.id;
-        // sessionStorage.setItem('id', JSON.stringify(dataId));
+    $.get('/api/user_data').then((user) => {
+        $('.member-name').text(user.username);
+        console.log(user);
+        const userId = user.id;
+        sessionStorage.setItem('id', JSON.stringify(userId));
         // console.log(dataId);
 
     })

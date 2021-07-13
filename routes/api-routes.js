@@ -1,4 +1,3 @@
-// const router = require('express').Router();
 const router = require('express').Router();
 const db = require('../models');
 const passport = require('../config/passport');
@@ -69,7 +68,6 @@ router.get('/Contact', (req,res) => {
 router.get('/user_data', (req,res) => {
     console.log(req);
 if (!req.user) {
-    // if user isnt logged in, send back an empty object
     res.json({});
 } else {
     res.json({
@@ -93,25 +91,15 @@ router.post('/signup', (req, res) => {
       password: req.body.password,
     })
       .then(function () {
-        //res.json(req.body);
-        //console.log('createduser' + res.body);
         res.redirect(307, '/api/login');
       })
       .catch((err) => {
         console.log('create user error' + err);
         res.status(406).json(err);
       });
-    // .catch((Sequelize.) => {
-    //   //console.log('create user error' + err);
-    //   res.status(401).json(UniqueConstraintError);
-    // });
   });
 router.post('/Case_Detail', (req,res) => {
-    // create, takes an argument of an object describing the item we want
-    // to insert into our table. In this case we just pass in an object with a text
-    // and complete property ie (req.body)
     console.log(res.body);
-    // create object
     db.caseDetail.create({
         itemType: req.body.itemType,
         serialNumber: req.body.serialNumber,
@@ -167,12 +155,12 @@ router.post('/Case', (req,res) => {
     console.log(req.body);
     db.Case.create({
         caseName: req.body.caseName,
-        userId: req.body.userId,
-        siteId: req.body.siteId,
-        contactId: req.body.contactId
-    }).then((newCase) => {
-        console.log(newCase);
-        res.json(newCase)
+        UserId: req.body.UserId,
+        SiteId: req.body.SiteId,
+        ContactId: req.body.ContactId
+    }).then((response) => {
+        console.log(response);
+        res.json(response)
     }).catch((err) => {
         console.log(err);
     })
@@ -192,7 +180,6 @@ router.post('/Site', (req,res) => {
 router.post('/Contact', (req,res) => {
     console.log(req.body);
     db.Contact.create({
-        // id: req.body.contactId,
         name: req.body.contactName,
         phoneNumber: req.body.contactPhone,
         email: req.body.contactEmail,
