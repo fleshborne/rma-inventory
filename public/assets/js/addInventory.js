@@ -62,10 +62,10 @@ const addSite = () => {
 const addCase = () => {
     const caseName = $('#caseName');
     const UserId = sessionStorage.getItem('id');
-    const SiteId = $('#insertSite').attr('id');
-    const ContactId = $('#insertContact').attr('id');
+    const SiteId = $('#insertSite');
+    const ContactId = $('#insertContact');
     
-    
+    console.log(SiteId, ContactId);
 
     if(!caseName.val().trim() || !UserId || !SiteId || !ContactId){
         console.log('Please enter all of the Case information')
@@ -75,8 +75,8 @@ const addCase = () => {
     const newCase = {
         caseName: caseName.val().trim(),
         UserId: UserId,
-        SiteId: SiteId,
-        ContactId: ContactId,
+        SiteId: SiteId.val(),
+        ContactId: ContactId.val(),
     };
     console.log(newCase);
     axios.post('/api/Case', newCase).then((res) => {
@@ -131,22 +131,26 @@ const addFault = () => {
 }
 const addPart = () => {
     const partType = $('#partPartType');
+    const partNumber = $('#partPartNumber');
     const serialNumber = $('#partSerialNumber');
+    const SupplierId  = $('#insertSupplier');
 
-    if(!partType.val().trim() || !serialNumber.val().trim()) {
+    if(!partType.val().trim()|| !partNumber.val().trim() || !serialNumber.val().trim() || !SupplierId.val() ) {
         console.log('please add required info for part submission')
         return;
     }
 
     const newPart = {
         partType : partType.val().trim(),
-        serialNumber : serialNumber.val().trim() 
+        partNumber: partNumber.val().trim(),
+        serialNumber : serialNumber.val().trim(),
+        SupplierId : SupplierId.val(), 
     }
 
     axios.post('/api/Part', newPart)
     .then((res) => {
         console.log(res)
-        console.log(`New Part: ${newPart}, was added`);
+        console.log(`New Part: ${part}, was added`);
     })
     .catch((err) => {
         console.log(err);

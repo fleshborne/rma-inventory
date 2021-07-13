@@ -12,6 +12,13 @@ module.exports = (sequelize, DataTypes) => {
  })
  caseDetail.associate = (models) => {
 
+caseDetail.belongsTo(models.Case, {
+  onDelete: 'cascade',
+  foreignKey: {
+    allowNull: false,
+  }
+})
+
 caseDetail.belongsTo(models.Part, {
   onDelete: 'cascade',
   foreignKey : {

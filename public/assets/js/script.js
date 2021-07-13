@@ -6,14 +6,15 @@ $('select').formSelect();
     const callRmaInvent = () => {
         axios.get(`/api/Case_Detail`).then((items) => {
         const $table = $('#insertInventory');
-
         console.log(items);
-
         console.log('inventory will go here');
-        
         $table.empty();
         items.data.forEach((item) => {
             const id = item.id;
+            // Table data
+            const caseName = item.caseName;
+            const caseSite = item.caseSite;
+            const caseContact = item.caseContact;
             const itemType = item.itemType;
             const serialNumber = item.serialNumber;
             const createdAt = item.createdAt;
@@ -23,9 +24,11 @@ $('select').formSelect();
             const DispositionId = item.DispositionId;
             const faultReason = item.Fault.reasonForReturn;
             const dispositionAction = item.Disposition.actionTaken;
-
-            
+            // Table headers
             const headId = 'Id';
+            const headCaseName = 'Case Name';
+            const headCaseSite = 'Case Site';
+            const headCaseContact = 'Case Contact';
             const headItemType = 'Item Type'
             const headSerialNumber = 'Serial Number'
             const headCreatedAt = 'Created At'
@@ -41,6 +44,9 @@ $('select').formSelect();
             $table.append(`
             <thead>
             <th>${headId}</th>
+            <th>${headCaseName}</th>
+            <th>${headCaseSite}</th>
+            <th>${headCaseContact}</th>
             <th>${headSerialNumber}</th>
             <th>${headItemType}</th>
             <th>${headPartId}</th>
@@ -53,6 +59,9 @@ $('select').formSelect();
             </thead>
             <tr>
             <td>${id}</td>
+            <td>${caseName}</td>
+            <td>${caseSite}</td>
+            <td>${caseContact}</td>
             <td>${serialNumber}</td>
             <td>${itemType}</td>
             <td>${PartId}</td>
@@ -73,6 +82,8 @@ $(document).on('click', '#viewDatabase', (event) => {
     callRmaInvent();
 
 })
+
+// Generate Site responses for drop down
 const insertSite = $('#insertSite');
     $.get('/api/Site').then((data) => {
         console.log(data);
@@ -82,6 +93,8 @@ const insertSite = $('#insertSite');
         });
         insertSite.formSelect();
     })
+
+// Generate Contact responses for drop down
 const insertContact = $('#insertContact');
     $.get('/api/Contact').then((data) => {
         console.log(data);
@@ -92,16 +105,62 @@ const insertContact = $('#insertContact');
         insertContact.formSelect();
     })
 
+// Pass user data for dom display and user database correlation 
     $.get('/api/user_data').then((user) => {
         $('.member-name').text(user.username);
         console.log(user);
         const userId = user.id;
         sessionStorage.setItem('id', JSON.stringify(userId));
-        // console.log(dataId);
-
     })
-// var instance = M.Collapsible.init(elem, {
-//   accordion: false
-// });
+// Pass case data for Case Detail relation
+    const insertCase = $('#insertCase');
+    $.get('/api/Case').then((data) => {
+        console.log(data);
+        data.forEach((caseInfo) => {
+            const newCase = $('<option>').attr('value', caseInfo.id).text(caseInfo.caseName);
+            insertCase.append(newCase);
+        });
+        insertCase.formSelect();
+    })
+// Pass part data for Case Detail relation
+    const insertPart = $('#insertPart');
+    $.get('/api/Part').then((parts) => {
+        console.log(parts);
+        parts.forEach((part) => {
+            const newPart = $('<option>').attr('value', part.id).text(part.partType);
+            insertPart.append(newPart);
+        })
+        insertPart.formSelect();
+    })
+// Pass Fault data for Case Detail 
+    const insertFault = $('#insertFault');
+    $.get('/api/Fault').then((data) => {
+        console.log(data);
+        data.forEach((Fault) => {
+            const newFault = $('<option>').attr('value', Fault.id).text(Fault.reasonForReturn);
+            insertFault.append(newFault);
+        });
+        insertFault.formSelect();
+    })
+    const insertDisposition = $('#insertDisposition');
+    $.get('/api/Disposition').then((data) => {
+        console.log(data);
+        data.forEach((Disposition) => {
+            const newDisposition = $('<option>').attr('value', Disposition.id).text(Disposition.actionTaken);
+            insertDisposition.append(newDisposition);
+        });
+        insertDisposition.formSelect();
+    })
+
+//  Pass supplier data for part relation
+const insertSupplier = $('#insertSupplier');
+$.get('/api/Supplier').then((suppliers) => {
+    console.log(suppliers);
+    suppliers.forEach((supplier) => {
+        const newSupplier = $('<option>').attr('value', supplier.id).text(supplier.name)
+        insertSupplier.append(newSupplier);
+    })
+    insertSupplier.formSelect();
+})
 
 })

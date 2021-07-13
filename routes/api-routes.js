@@ -5,7 +5,7 @@ const passport = require('../config/passport');
 
 router.get('/Case_Detail', (req,res) => {
     db.caseDetail.findAll({
-        include: [db.Part,db.Fault,db.Disposition]
+        include: [db.Part,db.Fault,db.Disposition,db.Case]
     }).then((response) => {
         console.log(response);
         res.json(response);
@@ -114,7 +114,9 @@ router.post('/Part', (req,res) => {
     console.log(req.body);
     db.Part.create({
         partType: req.body.partType,
-        serialNumber: req.body.serialNumber
+        partNumber: req.body.partNumber,
+        serialNumber: req.body.serialNumber,
+        SupplierId: req.body.SupplierId,
     }).then((response) => {
         res.json(response)
     }).catch((err) => {
@@ -159,7 +161,6 @@ router.post('/Case', (req,res) => {
         SiteId: req.body.SiteId,
         ContactId: req.body.ContactId
     }).then((response) => {
-        console.log(response);
         res.json(response)
     }).catch((err) => {
         console.log(err);

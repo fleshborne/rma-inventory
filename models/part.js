@@ -11,6 +11,10 @@ module.exports = (sequelize,DataTypes) => {
             type: DataTypes.STRING,
             allowNull:false,
         },
+        partNumber : {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         serialNumber : {
             type:DataTypes.STRING,
             allowNull: false,
@@ -18,26 +22,12 @@ module.exports = (sequelize,DataTypes) => {
         
     })
     Part.associate = (models) => {
-        // Part.belongsToMany(models.Case, {
-        //     through: 'Case_Detail'
-        // })
-    //     Part.belongsTo(models.Case, {
-    //         foreignKey: {
-    //             allowNull:false
-    //         }
-    //     })
-    //     Part.hasMany(models.serialNumber, {
-    //         onDelete: 'cascade',
-    //     })
         Part.belongsTo(models.Supplier, {
-            foreignKey: 'SupplierId'
-        }),
-        Part.hasMany(models.caseDetail, {
             foreignKey: {
                 allowNull: false,
-                key: 'Part_NumberId'
             }
-        })
+        });
+       
     }
     return Part;
 }
