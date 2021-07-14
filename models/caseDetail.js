@@ -1,15 +1,14 @@
 
 module.exports = (sequelize, DataTypes) => {
  const caseDetail = sequelize.define('caseDetail', {
-  itemType: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  serialNumber: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  }
- })
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+}
+
+  })
+
  caseDetail.associate = (models) => {
 
 caseDetail.belongsTo(models.Case, {

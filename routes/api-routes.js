@@ -3,41 +3,45 @@ const db = require('../models');
 const passport = require('../config/passport');
 // Get Requests##################
 
-router.get('/Case_Detail', (req,res) => {
+router.get('/caseDetail', (req,res) => {
     db.caseDetail.findAll({
         include: [db.Part,db.Fault,db.Disposition,db.Case]
     }).then((response) => {
-        console.log(response);
+        // console.log(response);
         res.json(response);
-    })
+    }).catch((err) => {
+        console.log(err)
+    });
+
+
 });
 router.get('/Part', (req,res) => {
     db.Part.findAll().then((response) => {
-        console.log(response);
+        // console.log(response);
         res.json(response);
     })
 })
 router.get('/Fault', (req,res) => {
     db.Fault.findAll().then((response) => {
-        console.log(response);
+        // console.log(response);
         res.json(response);
     })
 })
 router.get('/Disposition', (req,res) => {
     db.Disposition.findAll().then((response) => {
-        console.log(response);
+        // console.log(response);
         res.json(response);
     })
 })
 router.get('/Part', (req,res) => {
     db.Part.findAll().then((response) => {
-        console.log(response);
+        // console.log(response);
         res.json(response);
     })
 })
 router.get('/Supplier', (req,res)=>{
     db.Supplier.findAll().then((response) => {
-        console.log(response);
+        // console.log(response);
         res.json(response);
     })
 })
@@ -45,13 +49,13 @@ router.get('/Case', (req,res) => {
     db.Case.findAll({
         include: [db.Site,db.Contact,db.User]
     }).then((response) => {
-        console.log(response);
+        // console.log(response);
         res.json(response);
     })
 })
 router.get('/Site', (req,res) => {
     db.Site.findAll().then((response) => {
-        console.log(response);
+        // console.log(response);
         res.json(response);
     }).catch((err) => {
         res.status(401).json(err);
@@ -59,7 +63,7 @@ router.get('/Site', (req,res) => {
 })
 router.get('/Contact', (req,res) => {
     db.Contact.findAll().then((response) => {
-        console.log(response);
+        // console.log(response);
         res.json(response);
     }).catch((err) => {
         res.status(401).json(err);
@@ -98,15 +102,19 @@ router.post('/signup', (req, res) => {
         res.status(406).json(err);
       });
   });
-router.post('/Case_Detail', (req,res) => {
+router.post('/caseDetail', (req,res) => {
     console.log(res.body);
     db.caseDetail.create({
-        itemType: req.body.itemType,
-        serialNumber: req.body.serialNumber,
+        CaseId: req.body.CaseId,
+        PartId: req.body.PartId,
+        FaultId: req.body.FaultId,
+        DispositionId: req.body.DispositionId,
     }).then((response) => {
+        console.log(response);
         res.json(response);
     }).catch((err) => {
         res.status(401).json(err);
+        console.log(err)
     });
 
 })

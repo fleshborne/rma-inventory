@@ -88,6 +88,29 @@ const addCase = () => {
 }
 const addCaseDetail = () => {
 
+    const CaseId = $('#insertCase');
+    const PartId = $('#insertPart');
+    const FaultId = $('#insertFault')
+    const DispositionId = $('#insertDisposition');
+
+    if(!CaseId.val() || !PartId.val() || !FaultId.val() || !DispositionId.val()) {
+        console.log('Please enter all of the Case Detail information.')
+        return;
+    }
+
+    const newCaseDetail = {
+        CaseId: CaseId.val(),
+        PartId: PartId.val(),
+        FaultId:FaultId.val(),
+        DispositionId: DispositionId.val(),
+    }
+    console.log(newCaseDetail);
+    axios.post('/api/caseDetail', newCaseDetail).then((res) => {
+        console.log(`You've posted ${res} to Case Details`)
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 }
 const addDisposition = () => {
     const actionTaken = $('#dispositionActionTaken');
@@ -148,8 +171,8 @@ const addPart = () => {
     }
 
     axios.post('/api/Part', newPart)
-    .then((res) => {
-        console.log(res)
+    .then((part) => {
+        console.log(part)
         console.log(`New Part: ${part}, was added`);
     })
     .catch((err) => {
@@ -179,33 +202,46 @@ const addSupplier = () => {
 $('#contactForm').on('submit', (event) => {
     event.preventDefault();
     addContact();
+    location.reload();
 })
 
 $('#faultForm').on('submit', (event) => {
     event.preventDefault();
     addFault();
+    location.reload();
 })
 $('#siteForm').on('submit', (event) => {
     event.preventDefault();
     addSite();
+    location.reload();
 })
 
 $('#dispositionForm').on('submit', (event) => {
     event.preventDefault();
     addDisposition();
+    location.reload();
 })
 
 $('#partForm').on('submit', (event) => {
     event.preventDefault();
     addPart();
+    location.reload();
 })
 
 $('#supplierForm').on('submit', (event) => {
     event.preventDefault();
     addSupplier();
+    location.reload();
 })
 
 $('#caseForm').on('submit', (event) => {
     event.preventDefault();
     addCase();
+    location.reload();
+})
+
+$('#caseDetailForm').on('submit', (event) => {
+    event.preventDefault();
+    addCaseDetail();
+    // location.reload();
 })

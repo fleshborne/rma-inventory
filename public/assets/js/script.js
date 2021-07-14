@@ -4,7 +4,7 @@ $('.dropdown-trigger').dropdown();
 $('select').formSelect();
 // $('select').material_select();
     const callRmaInvent = () => {
-        axios.get(`/api/Case_Detail`).then((items) => {
+        axios.get('/api/caseDetail').then((items) => {
         const $table = $('#insertInventory');
         console.log(items);
         console.log('inventory will go here');
@@ -12,11 +12,11 @@ $('select').formSelect();
         items.data.forEach((item) => {
             const id = item.id;
             // Table data
-            const caseName = item.caseName;
-            const caseSite = item.caseSite;
-            const caseContact = item.caseContact;
-            const itemType = item.itemType;
-            const serialNumber = item.serialNumber;
+            const caseName = item.Case.caseName;
+            const caseSite = item.Case.caseSite;
+            const caseContact = item.Case.caseContact;
+            const itemType = item.Part.partType;
+            const serialNumber = item.Part.serialNumber;
             const createdAt = item.createdAt;
             const updatedAt = item.updatedAt;
             const PartId = item.PartId;
