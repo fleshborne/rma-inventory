@@ -3,76 +3,61 @@ $('.collapsible').collapsible();
 $('.dropdown-trigger').dropdown();
 $('select').formSelect();
 // $('select').material_select();
-    const callRmaInvent = () => {
+const $table = $('#find-schedule-table');
+const $tbody = $('#find-schedule-tbody');
+
+        const callRmaCases = () => {
+        //    $tbody.empty(); 
+            axios.get('/api/Case').then((response) => {
+                Promise.all(response.data.forEach((response) => {
+                    console.log(response);
+                    const caseContactName = response.Contact.name;
+                    const caseSiteName = response.Site.siteName;
+                    callRmaInvent(caseContactName, caseSiteName)
+    
+                }))
+            }).catch((err) => {
+                console.log(err);
+            })
+            
+            }
+
+        const callRmaInvent = async (caseContactName, caseSiteName) => {
+
+        console.log(caseSiteName, caseContactName);
         axios.get('/api/caseDetail').then((items) => {
-        const $table = $('#insertInventory');
+        $tbody.empty();
         console.log(items);
         console.log('inventory will go here');
-        $table.empty();
-        items.data.forEach((item) => {
+        Promise.all(items.data.forEach((item) => {
             const id = item.id;
             // Table data
             const caseName = item.Case.caseName;
-            const caseSite = item.Case.caseSite;
-            const caseContact = item.Case.caseContact;
+            const caseSite = caseSiteName;
+            const caseContact = caseContactName;
             const itemType = item.Part.partType;
             const serialNumber = item.Part.serialNumber;
             const createdAt = item.createdAt;
             const updatedAt = item.updatedAt;
-            const PartId = item.PartId;
-            const FaultId = item.FaultId;
-            const DispositionId = item.DispositionId;
             const faultReason = item.Fault.reasonForReturn;
             const dispositionAction = item.Disposition.actionTaken;
-            // Table headers
-            const headId = 'Id';
-            const headCaseName = 'Case Name';
-            const headCaseSite = 'Case Site';
-            const headCaseContact = 'Case Contact';
-            const headItemType = 'Item Type'
-            const headSerialNumber = 'Serial Number'
-            const headCreatedAt = 'Created At'
-            const headUpdatedAt = 'Updated At'
-            const headPartId = 'Part Id'
-            const headFaultId = 'Fault Id'
-            const headDispositionId = 'Disposition Id'
-            const headFaultReason = 'Fault'
-            const headDispositionAction = 'Action Taken'
-
             const addedToInvent = dateFns.format(createdAt, 'MMM D, YY')
             const updatedInvent = dateFns.format(updatedAt, 'MMM D, YY')
-            $table.append(`
-            <thead>
-            <th>${headId}</th>
-            <th>${headCaseName}</th>
-            <th>${headCaseSite}</th>
-            <th>${headCaseContact}</th>
-            <th>${headSerialNumber}</th>
-            <th>${headItemType}</th>
-            <th>${headPartId}</th>
-            <th>${headFaultId}</th>
-            <th>${headDispositionId}</th>             
-            <th>${headCreatedAt}</th>
-            <th>${headUpdatedAt}</th>
-            <th>${headFaultReason}</th>
-            <th>${headDispositionAction}</th>
-            </thead>
+
+            $tbody.append(`
             <tr>
             <td>${id}</td>
             <td>${caseName}</td>
             <td>${caseSite}</td>
             <td>${caseContact}</td>
             <td>${serialNumber}</td>
-            <td>${itemType}</td>
-            <td>${PartId}</td>
-            <td>${FaultId}</td>
-            <td>${DispositionId}</td>            
-            <td>${addedToInvent}</td>
-            <td>${updatedInvent}</td>
+            <td>${itemType}</td>         
             <td>${faultReason}</td>
             <td>${dispositionAction}</td>
+            <td>${addedToInvent}</td>
+            <td>${updatedInvent}</td>
             </tr>`)
-        });
+        }));
     }).catch((err) => {
         console.log(err)
     });   
@@ -80,7 +65,7 @@ $('select').formSelect();
 $(document).on('click', '#viewDatabase', (event) => {
     event.preventDefault();
     callRmaInvent();
-
+    callRmaCases();
 })
 
 // Generate Site responses for drop down

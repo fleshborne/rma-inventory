@@ -70,7 +70,7 @@ router.get('/Contact', (req,res) => {
     });
 })
 router.get('/user_data', (req,res) => {
-    console.log(req);
+    // console.log(req);
 if (!req.user) {
     res.json({});
 } else {
@@ -81,10 +81,11 @@ if (!req.user) {
     });
 }
 });
+
 // Post Requests ##############################################
 router.post('/login', passport.authenticate('local'), function (req, res) {
     console.log('check for invalid user' + res.message);
-    console.log(req.user);
+    // console.log(req.user);
     res.json(req.user);
 
   });
@@ -110,7 +111,7 @@ router.post('/caseDetail', (req,res) => {
         FaultId: req.body.FaultId,
         DispositionId: req.body.DispositionId,
     }).then((response) => {
-        console.log(response);
+        // console.log(response);
         res.json(response);
     }).catch((err) => {
         res.status(401).json(err);
@@ -180,7 +181,7 @@ router.post('/Site', (req,res) => {
         siteName: req.body.siteName,
         siteLocation: req.body.siteLocation
     }).then((response) => {
-        console.log(response);
+        // console.log(response);
         res.json(response);
     }).catch((err) => {
         res.status(401).json(err);
@@ -194,7 +195,7 @@ router.post('/Contact', (req,res) => {
         email: req.body.contactEmail,
         user: req.body.user
     }).then((newContact) => {
-        console.log(newContact);
+        // console.log(newContact);
         res.json(newContact);
     }).catch((err) => {
         console.log(err);

@@ -243,5 +243,5 @@ $('#caseForm').on('submit', (event) => {
 $('#caseDetailForm').on('submit', (event) => {
     event.preventDefault();
     addCaseDetail();
-    // location.reload();
+    location.reload();
 })
