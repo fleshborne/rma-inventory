@@ -7,34 +7,36 @@ const $table = $('#find-schedule-table');
 const $tbody = $('#find-schedule-tbody');
 
         const callRmaCases = () => {
-        //    $tbody.empty(); 
-            axios.get('/api/Case').then((response) => {
-                Promise.all(response.data.forEach((response) => {
-                    console.log(response);
-                    const caseContactName = response.Contact.name;
-                    const caseSiteName = response.Site.siteName;
-                    callRmaInvent(caseContactName, caseSiteName)
-    
-                }))
+          $tbody.empty(); 
+             axios.get('/api/Case').then((response) => {
+                for(let i = 0; response.data.length > 0; i++){
+                    const caseContactName = response.data[i].Contact.name;
+                    const caseSiteName = response.data[i].Site.siteName;
+                     console.log(response);
+                     console.log(caseContactName, caseSiteName)
+                     callRmaInvent([caseContactName,caseSiteName])
+                    //  Promise.all([caseContactName,caseSiteName]).then((values) => {
+                    //     console.log(values);
+                    //     callRmaInvent(values)  
+                    //  });
+                };
             }).catch((err) => {
                 console.log(err);
             })
             
-            }
+            };
 
-        const callRmaInvent = async (caseContactName, caseSiteName) => {
-
-        console.log(caseSiteName, caseContactName);
-        axios.get('/api/caseDetail').then((items) => {
+        const callRmaInvent = (caseContactName,caseSiteName) => {
+     axios.get('/api/caseDetail').then((items) => {
         $tbody.empty();
         console.log(items);
         console.log('inventory will go here');
-        Promise.all(items.data.forEach((item) => {
+       items.data.forEach((item) => {
             const id = item.id;
             // Table data
             const caseName = item.Case.caseName;
-            const caseSite = caseSiteName;
-            const caseContact = caseContactName;
+            const caseSite =  caseSiteName;
+            const caseContact =  caseContactName;
             const itemType = item.Part.partType;
             const serialNumber = item.Part.serialNumber;
             const createdAt = item.createdAt;
@@ -57,15 +59,16 @@ const $tbody = $('#find-schedule-tbody');
             <td>${addedToInvent}</td>
             <td>${updatedInvent}</td>
             </tr>`)
-        }));
+        });
     }).catch((err) => {
         console.log(err)
     });   
     };
 $(document).on('click', '#viewDatabase', (event) => {
     event.preventDefault();
-    callRmaInvent();
     callRmaCases();
+    callRmaInvent();
+    
 })
 
 // Generate Site responses for drop down
@@ -149,3 +152,10 @@ $.get('/api/Supplier').then((suppliers) => {
 })
 
 })
+            //     response.data.forEach((response) => {
+            //         console.log(response);
+            //         const caseContactName = response.Contact[i].name;
+            //         const caseSiteName = response[i].Site.siteName;
+            //         callRmaInvent(caseContactName, caseSiteName)
+    
+            //     })
