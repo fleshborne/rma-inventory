@@ -47,8 +47,14 @@ const $tbody = $('#find-schedule-tbody');
                     $tbody.empty()
                     items.data.forEach((item) => {
                         console.log(items);
+                        const putButton = `<button class="btn-warning btn waves-effect waves-yellow" id="updateInv" type="put" name="action">Update
+                        <i class="material-icons update">update</i>
+                      </button>`
+                        const deleteButton = `<button class="btn waves-effect waves-red" id="deleteInv" type="delete" name="action">Delete
+                        <i class="material-icons delete">delete</i>
+                      </button>`
                         $tbody.append(`
-                        <tr>
+                        <tr id=${item.id}>
                         <td>${item.id}</td>
                         <td>${item.caseName}</td>
                         <td>${item.Site.siteName}</td>
@@ -59,6 +65,9 @@ const $tbody = $('#find-schedule-tbody');
                         <td>${item.Disposition.actionTaken}</td>
                         <td>${dateFns.format(item.createdAt, 'MMM D, YY')}</td>
                         <td>${dateFns.format(item.updatedAt, 'MMM D, YY')}</td>
+                        <td>${putButton}</td>
+                        <td>${deleteButton}</td>
+                        </tr>
                         `)
                     })
                 } catch(error) {
@@ -107,6 +116,15 @@ $(document).on('click', '#viewDatabase', (event) => {
     event.preventDefault();
     // callRmaCases();
     callRmaInvent();
+
+    updateButton = $('#updateInv');
+    deleteButton = $('#deleteInv');
+
+    updateButton.on('click', (event) => {
+        event.preventDefault();
+        alert('Item has been updated');
+        console.log('i was clicked')
+    })
     
 })
 

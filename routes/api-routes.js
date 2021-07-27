@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const db = require('../models');
 const passport = require('../config/passport');
+const { eachQuarterOfInterval } = require('date-fns');
 // Get Requests##################
 
 router.get('/caseDetail', (req,res) => {
@@ -205,6 +206,17 @@ router.post('/Contact', (req,res) => {
     });
 })
 //  Put Requests ################################################
+router.put('/caseDetail/:id', (req,res) => {
+    db.caseDetail.findOne({
+        where: {
+            id: req.body.id
+        },
+    }).then((updatedCaseDetail)=>{
+        res.json(updatedCaseDetail);
+    }).catch((err) => {
+        console.table([err.name, err.type, err.stack])
+    })
+})
 
 //  Delete Requests #############################################
 
