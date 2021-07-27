@@ -5,7 +5,7 @@ const passport = require('../config/passport');
 
 router.get('/caseDetail', (req,res) => {
     db.caseDetail.findAll({
-        include: [db.Part,db.Fault,db.Disposition,db.Case]
+        include: [db.Part,db.Fault,db.Disposition,db.Contact,db.Site]
     }).then((response) => {
         // console.log(response);
         res.json(response);
@@ -106,7 +106,10 @@ router.post('/signup', (req, res) => {
 router.post('/caseDetail', (req,res) => {
     console.log(res.body);
     db.caseDetail.create({
-        CaseId: req.body.CaseId,
+        caseName: req.body.caseName,
+        UserId: req.body.UserId,
+        SiteId: req.body.SiteId,
+        ContactId: req.body.ContactId,
         PartId: req.body.PartId,
         FaultId: req.body.FaultId,
         DispositionId: req.body.DispositionId,

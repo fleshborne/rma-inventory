@@ -156,7 +156,7 @@
       </div>
     </form>
     </div>
-    <div class="col s12 m6 l3">
+    <!-- <div class="col s12 m6 l3">
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
           <span class="card-title">Case</span>
@@ -192,49 +192,28 @@
       </div>
     </form>
     </div>
-  </div>
-    <div class="col s12 m6 l3">
+  </div> -->
+    
+    <div class="col s12 m6 l3"> 
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
-          <span class="card-title">Case Detail</span>
-          <form class="col s12" id="caseDetailForm">
-            <div class="row">
-          </div>
-          <div class="row">
+          <span class="card-title">Fault</span>
+          <form class="col s12" id="faultForm">
+            <!-- <div class="row">
             <div class="input-field col s12">
-            <select id='insertCase'>
-            <option value="" disable selected>Choose your Case Relation</option>
-            </select>
-        <label>Case</label>
+              <textarea id="faultId" class="materialize-textarea"></textarea>
+              <label for="textarea1">Id</label>
             </div>
-          </div>
+          </div> -->
           <div class="row">
             <div class="input-field col s12">
-            <select id='insertPart'>
-            <option value="" disable selected>Choose your Part</option>
-            </select>
-        <label>Part</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-            <select id='insertFault'>
-            <option value="" disable selected>Choose your Fault</option>
-            </select>
-        <label>Fault</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-            <select id='insertDisposition'>
-            <option value="" disable selected>Choose your Disposition</option>
-            </select>
-        <label>Disposition</label>
+              <textarea id="faultReason" class="materialize-textarea"></textarea>
+              <label for="textarea1">Reason</label>
             </div>
           </div>
         </div>
         <div class="card-action">
-          <button class="btn waves-effect waves-light" id="caseDetailFormSubmit" type="submit" name="action">Submit
+          <button class="btn waves-effect waves-light" type="submit" id="faultForm" name="action">Submit
             <i class="material-icons right">send</i>
           </button>
         </div>
@@ -267,33 +246,34 @@
       </div>
     </form>
     </div>
+
     <div class="col s12 m6 l3">
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
-          <span class="card-title">Fault</span>
-          <form class="col s12" id="faultForm">
-            <!-- <div class="row">
-            <div class="input-field col s12">
-              <textarea id="faultId" class="materialize-textarea"></textarea>
+          <span class="card-title">Supplier</span>
+          <form class="col s12" id="supplierForm">
+            <div class="row">
+            <!-- <div class="input-field col s12">
+              <textarea id="supplierId" class="materialize-textarea"></textarea>
               <label for="textarea1">Id</label>
-            </div>
-          </div> -->
+            </div> -->
+          </div>
           <div class="row">
             <div class="input-field col s12">
-              <textarea id="faultReason" class="materialize-textarea"></textarea>
-              <label for="textarea1">Reason</label>
+              <textarea id="supplierName" class="materialize-textarea"></textarea>
+              <label for="textarea1">Name</label>
             </div>
           </div>
-        </div>
         <div class="card-action">
-          <button class="btn waves-effect waves-light" type="submit" id="faultForm" name="action">Submit
+          <button class="btn waves-effect waves-light" type="submit" id="supplierFormSubmit" name="action">Submit
             <i class="material-icons right">send</i>
           </button>
         </div>
       </div>
     </form>
     </div>
-    <div class="col s12 m6 l3">
+    </div>
+    <div class="col s12 m6 l3" id="pushCard">
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
           <span class="card-title">Part</span>
@@ -339,28 +319,69 @@
       </div>
     </form>
     </div>
-    <div class="col s12 m6 l3">
+
+    <div class="col s12 m6 l3" id="pushCard">
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
-          <span class="card-title">Supplier</span>
-          <form class="col s12" id="supplierForm">
+          <span class="card-title">Case Detail</span>
+          <form class="col s12" id="caseDetailForm">
             <div class="row">
-            <!-- <div class="input-field col s12">
-              <textarea id="supplierId" class="materialize-textarea"></textarea>
-              <label for="textarea1">Id</label>
-            </div> -->
           </div>
           <div class="row">
             <div class="input-field col s12">
-              <textarea id="supplierName" class="materialize-textarea"></textarea>
-              <label for="textarea1">Name</label>
+              <textarea id="caseName" class="materialize-textarea"></textarea>
+              <label for="textarea1">Case Name</label>
             </div>
           </div>
-        <div class="card-action">
-          <button class="btn waves-effect waves-light" type="submit" id="supplierFormSubmit" name="action">Submit
-            <i class="material-icons right">send</i>
-          </button>
+          <div class="row">
+            <div class="input-field col s12">
+            <select id='insertContact'>
+            <option value="" disable selected>Choose your Case Relation</option>
+            </select>
+        <label>Contact</label>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="input-field col s12">
+            <select id='insertSite'>
+            <option value="" disable selected>Choose your Case Relation</option>
+            </select>
+        <label>Site</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+            <select id='insertPart'>
+            <option value="" disable selected>Choose your Part</option>
+            </select>
+        <label>Part</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+            <select id='insertFault'>
+            <option value="" disable selected>Choose your Fault</option>
+            </select>
+        <label>Fault</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+            <select id='insertDisposition'>
+            <option value="" disable selected>Choose your Disposition</option>
+            </select>
+        <label>Disposition</label>
+            </div>
+          </div>
+          <div class="card-action">
+            <button class="btn waves-effect waves-light" id="caseDetailFormSubmit" type="submit" name="action">Submit
+              <i class="material-icons right">send</i>
+            </button>
+          </div>
         </div>
+      </div>
+
       </div>
     </form>
     </div>

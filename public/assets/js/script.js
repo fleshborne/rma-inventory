@@ -1,3 +1,5 @@
+
+
 $(document).ready(() => {
 $('.collapsible').collapsible();
 $('.dropdown-trigger').dropdown();
@@ -6,67 +8,104 @@ $('select').formSelect();
 const $table = $('#find-schedule-table');
 const $tbody = $('#find-schedule-tbody');
 
-        const callRmaCases = () => {
-          $tbody.empty(); 
-             axios.get('/api/Case').then((response) => {
-                for(let i = 0; response.data.length > 0; i++){
-                    const caseContactName = response.data[i].Contact.name;
-                    const caseSiteName = response.data[i].Site.siteName;
-                     console.log(response);
-                     console.log(caseContactName, caseSiteName)
-                     callRmaInvent([caseContactName,caseSiteName])
-                    //  Promise.all([caseContactName,caseSiteName]).then((values) => {
-                    //     console.log(values);
-                    //     callRmaInvent(values)  
-                    //  });
-                };
-            }).catch((err) => {
-                console.log(err);
-            })
-            
-            };
+        // const callRmaCases = async () => {
+        // try {
+        //     const response = await fetch('/api/Case')
+        //     const responseData = await response.json({})
+        //     responseData.forEach(innerObject => {
+        //         console.log(innerObject);
+        //         const caseContactName = innerObject.Contact.name;
+        //         const caseSiteName = innerObject.Site.siteName;
+        //         callRmaInvent(caseContactName, caseSiteName)
+        //     })
 
-        const callRmaInvent = (caseContactName,caseSiteName) => {
-     axios.get('/api/caseDetail').then((items) => {
-        $tbody.empty();
-        console.log(items);
-        console.log('inventory will go here');
-       items.data.forEach((item) => {
-            const id = item.id;
-            // Table data
-            const caseName = item.Case.caseName;
-            const caseSite =  caseSiteName;
-            const caseContact =  caseContactName;
-            const itemType = item.Part.partType;
-            const serialNumber = item.Part.serialNumber;
-            const createdAt = item.createdAt;
-            const updatedAt = item.updatedAt;
-            const faultReason = item.Fault.reasonForReturn;
-            const dispositionAction = item.Disposition.actionTaken;
-            const addedToInvent = dateFns.format(createdAt, 'MMM D, YY')
-            const updatedInvent = dateFns.format(updatedAt, 'MMM D, YY')
+        // }   catch(error){
+        //     console.table(error.name, error.type, error.stack)
+        // }
+            //   $tbody.empty(); 
+        //      axios.get('/api/Case').then((response) => {
+        //         for(let i = 0; response.data.length > 0; i++){
+        //             const caseContactName = response.data[i].Contact.name;
+        //             const caseSiteName = response.data[i].Site.siteName;
+        //              console.log(response);
+        //              console.log(caseContactName, caseSiteName)
+        //              callRmaInvent([caseContactName,caseSiteName])
+        //             //  Promise.all([caseContactName,caseSiteName]).then((values) => {
+        //             //     console.log(values);
+        //             //     callRmaInvent(values)  
+        //             //  });
+        //         };
+        //     }).catch((err) => {
+        //         console.log(err);
+        //     })
+// }
+         
 
-            $tbody.append(`
-            <tr>
-            <td>${id}</td>
-            <td>${caseName}</td>
-            <td>${caseSite}</td>
-            <td>${caseContact}</td>
-            <td>${serialNumber}</td>
-            <td>${itemType}</td>         
-            <td>${faultReason}</td>
-            <td>${dispositionAction}</td>
-            <td>${addedToInvent}</td>
-            <td>${updatedInvent}</td>
-            </tr>`)
-        });
-    }).catch((err) => {
-        console.log(err)
-    });   
-    };
+            const callRmaInvent = async () => {
+                try {
+                    const items = await axios.get('/api/caseDetail')
+                    $tbody.empty()
+                    items.data.forEach((item) => {
+                        console.log(items);
+                        $tbody.append(`
+                        <tr>
+                        <td>${item.id}</td>
+                        <td>${item.caseName}</td>
+                        <td>${item.Site.siteName}</td>
+                        <td>${item.Contact.name}</td>
+                        <td>${item.Part.partType}</td>
+                        <td>${item.Part.serialNumber}</td>        
+                        <td>${item.Fault.reasonForReturn}</td>
+                        <td>${item.Disposition.actionTaken}</td>
+                        <td>${dateFns.format(item.createdAt, 'MMM D, YY')}</td>
+                        <td>${dateFns.format(item.updatedAt, 'MMM D, YY')}</td>
+                        `)
+                    })
+                } catch(error) {
+                    console.table([error.name, error.type, error.stack])
+                }
+            }
+    //     const callRmaInvent = async (caseContactName,caseSiteName) => {
+    //  axios.get('/api/caseDetail').then((items) => {
+    //     $tbody.empty();
+    //     console.log(items);
+    //     console.log('inventory will go here');
+    //    items.data.forEach((item) => {
+    //         const id = item.id;
+    //         // Table data
+    //         const caseName = item.Case.caseName;
+    //         const caseSite =  caseSiteName;
+    //         const caseContact =  caseContactName;
+    //         const itemType = item.Part.partType;
+    //         const serialNumber = item.Part.serialNumber;
+    //         const createdAt = item.createdAt;
+    //         const updatedAt = item.updatedAt;
+    //         const faultReason = item.Fault.reasonForReturn;
+    //         const dispositionAction = item.Disposition.actionTaken;
+    //         const addedToInvent = dateFns.format(createdAt, 'MMM D, YY')
+    //         const updatedInvent = dateFns.format(updatedAt, 'MMM D, YY')
+
+    //         $tbody.append(`
+    //         <tr>
+    //         <td>${id}</td>
+    //         <td>${caseName}</td>
+    //         <td>${caseSite}</td>
+    //         <td>${caseContact}</td>
+    //         <td>${serialNumber}</td>
+    //         <td>${itemType}</td>         
+    //         <td>${faultReason}</td>
+    //         <td>${dispositionAction}</td>
+    //         <td>${addedToInvent}</td>
+    //         <td>${updatedInvent}</td>
+    //         </tr>`)
+    //     });
+    // }).catch((err) => {
+    //     console.log(err)
+    // });   
+    // };
 $(document).on('click', '#viewDatabase', (event) => {
     event.preventDefault();
-    callRmaCases();
+    // callRmaCases();
     callRmaInvent();
     
 })
@@ -101,15 +140,24 @@ const insertContact = $('#insertContact');
         sessionStorage.setItem('id', JSON.stringify(userId));
     })
 // Pass case data for Case Detail relation
-    const insertCase = $('#insertCase');
-    $.get('/api/Case').then((data) => {
-        console.log(data);
-        data.forEach((caseInfo) => {
-            const newCase = $('<option>').attr('value', caseInfo.id).text(caseInfo.caseName);
-            insertCase.append(newCase);
-        });
-        insertCase.formSelect();
-    })
+    // const insertContact = $('#insertContact');
+    // $.get('/api/Contact').then((data) => {
+    //     console.log(data);
+    //     data.forEach((contact) => {
+    //         const newContact = $('<option>').attr('value', contact.id).text(contact.name);
+    //         insertContact.append(newContact);
+    //     });
+    //     insertContact.formSelect();
+    // })
+    // const insertSite = $('#insertSite');
+    // $.get('/api/Case').then((data) => {
+    //     console.log(data);
+    //     data.forEach((site) => {
+    //         const newSite = $('<option>').attr('value', site.id).text(site.siteName);
+    //         insertSite.append(newSite);
+    //     });
+    //     insertSite.formSelect();
+    // })
 // Pass part data for Case Detail relation
     const insertPart = $('#insertPart');
     $.get('/api/Part').then((parts) => {
@@ -152,6 +200,7 @@ $.get('/api/Supplier').then((suppliers) => {
 })
 
 })
+
             //     response.data.forEach((response) => {
             //         console.log(response);
             //         const caseContactName = response.Contact[i].name;

@@ -5,13 +5,28 @@ module.exports = (sequelize, DataTypes) => {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
-}
+},
+  caseName: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  }
 
   })
 
  caseDetail.associate = (models) => {
+  caseDetail.belongsTo(models.User, {
+    foreignKey: 'UserId'
+})
 
-caseDetail.belongsTo(models.Case, {
+
+caseDetail.belongsTo(models.Contact, {
+  onDelete: 'cascade',
+  foreignKey: {
+    allowNull: false,
+  }
+})
+
+caseDetail.belongsTo(models.Site, {
   onDelete: 'cascade',
   foreignKey: {
     allowNull: false,

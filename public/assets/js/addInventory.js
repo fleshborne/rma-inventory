@@ -87,20 +87,25 @@ const addCase = () => {
     });
 }
 const addCaseDetail = () => {
-
-    const CaseId = $('#insertCase');
+    const UserId = sessionStorage.getItem('id');
+    const caseName = $('#caseName');
+    const ContactId = $('#insertContact');
+    const SiteId = $('#insertSite')
     const PartId = $('#insertPart');
     const FaultId = $('#insertFault')
     const DispositionId = $('#insertDisposition');
 
-    if(!CaseId.val() || !PartId.val() || !FaultId.val() || !DispositionId.val()) {
+    if(!UserId || !caseName.val().trim() || !ContactId.val() || !SiteId.val()|| !PartId.val() || !FaultId.val() || !DispositionId.val()) {
         console.log('Please enter all of the Case Detail information.')
         return;
     }
 
     const newCaseDetail = {
-        CaseId: CaseId.val(),
+        caseName: caseName.val().trim(),
+        UserId: UserId,
         PartId: PartId.val(),
+        ContactId: ContactId.val(),
+        SiteId: SiteId.val(),
         FaultId:FaultId.val(),
         DispositionId: DispositionId.val(),
     }
