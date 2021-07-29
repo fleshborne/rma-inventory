@@ -84,12 +84,11 @@ const $tbody = $('#find-schedule-tbody');
                  $(updateButton).on('click',(event) => {
                      event.preventDefault();
                      console.log(item);
-                     alert(`Inventory was updated`);
                      axios.put('/api/caseDetail/:id', item).then((response) => {
                          console.log(response);
                          
                      })
-                     
+                     alert(`Inventory was updated`);
                  })  
             }
             
