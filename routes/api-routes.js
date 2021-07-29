@@ -212,6 +212,7 @@ router.put('/caseDetail/:id', (req,res) => {
             id: req.body.id
         },
     }).then((updatedCaseDetail)=>{
+        console.log(updatedCaseDetail);
         res.json(updatedCaseDetail);
     }).catch((err) => {
         console.table([err.name, err.type, err.stack])

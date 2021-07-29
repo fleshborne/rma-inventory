@@ -47,7 +47,8 @@ const $tbody = $('#find-schedule-tbody');
                     $tbody.empty()
                     items.data.forEach((item) => {
                         console.log(items);
-                        const putButton = `<button class="btn-warning btn waves-effect waves-yellow" id="updateInv" type="put" name="action">Update
+                        const updateInv = item.id;
+                        const putButton = `<button class="btn-warning btn waves-effect waves-yellow" id="${updateInv}update" type="put" name="action">Update
                         <i class="material-icons update">update</i>
                       </button>`
                         const deleteButton = `<button class="btn waves-effect waves-red" id="deleteInv" type="delete" name="action">Delete
@@ -55,25 +56,44 @@ const $tbody = $('#find-schedule-tbody');
                       </button>`
                         $tbody.append(`
                         <tr id=${item.id}>
-                        <td>${item.id}</td>
-                        <td>${item.caseName}</td>
-                        <td>${item.Site.siteName}</td>
-                        <td>${item.Contact.name}</td>
-                        <td>${item.Part.partType}</td>
-                        <td>${item.Part.serialNumber}</td>        
-                        <td>${item.Fault.reasonForReturn}</td>
-                        <td>${item.Disposition.actionTaken}</td>
+                        <td contenteditable="true">${item.id}</td>
+                        <td contenteditable="true">${item.caseName}</td>
+                        <td contenteditable="true">${item.Site.siteName}</td>
+                        <td contenteditable="true">${item.Contact.name}</td>
+                        <td contenteditable="true">${item.Part.partType}</td>
+                        <td contenteditable="true">${item.Part.serialNumber}</td>        
+                        <td contenteditable="true">${item.Fault.reasonForReturn}</td>
+                        <td contenteditable="true">${item.Disposition.actionTaken}</td>
                         <td>${dateFns.format(item.createdAt, 'MMM D, YY')}</td>
                         <td>${dateFns.format(item.updatedAt, 'MMM D, YY')}</td>
                         <td>${putButton}</td>
                         <td>${deleteButton}</td>
                         </tr>
                         `)
+                        console.log(item)
+                        updateInventory(item);
                     })
                 } catch(error) {
                     console.table([error.name, error.type, error.stack])
                 }
             }
+            const updateInventory = async (item) => {
+                  const updateButton = $(`#${item.id}update`);
+                const deleteButton = $('#deleteInv');
+                
+                 $(updateButton).on('click',(event) => {
+                     event.preventDefault();
+                     console.log(item);
+                     alert(`Inventory was updated`);
+                     axios.put('/api/caseDetail/:id', item).then((response) => {
+                         console.log(response);
+                         
+                     })
+                     
+                 })  
+            }
+            
+            
     //     const callRmaInvent = async (caseContactName,caseSiteName) => {
     //  axios.get('/api/caseDetail').then((items) => {
     //     $tbody.empty();
@@ -112,21 +132,16 @@ const $tbody = $('#find-schedule-tbody');
     //     console.log(err)
     // });   
     // };
-$(document).on('click', '#viewDatabase', (event) => {
-    event.preventDefault();
-    // callRmaCases();
-    callRmaInvent();
+        $(document).on('click', '#viewDatabase', (event) => {
+            event.preventDefault();
+            // callRmaCases();
+            callRmaInvent();
+        
+            
+        })
 
-    updateButton = $('#updateInv');
-    deleteButton = $('#deleteInv');
 
-    updateButton.on('click', (event) => {
-        event.preventDefault();
-        alert('Item has been updated');
-        console.log('i was clicked')
-    })
     
-})
 
 // Generate Site responses for drop down
 const insertSite = $('#insertSite');
