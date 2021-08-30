@@ -56,14 +56,14 @@ const $tbody = $('#find-schedule-tbody');
                       </button>`
                         $tbody.append(`
                         <tr id=${item.id}>
-                        <td contenteditable="true">${item.id}</td>
-                        <td contenteditable="true">${item.caseName}</td>
-                        <td contenteditable="true">${item.Site.siteName}</td>
-                        <td contenteditable="true">${item.Contact.name}</td>
-                        <td contenteditable="true">${item.Part.partType}</td>
-                        <td contenteditable="true">${item.Part.serialNumber}</td>        
-                        <td contenteditable="true">${item.Fault.reasonForReturn}</td>
-                        <td contenteditable="true">${item.Disposition.actionTaken}</td>
+                        <td contenteditable="true" id="itemId">${item.id}</td>
+                        <td contenteditable="true" id="itemCaseName">${item.caseName}</td>
+                        <td contenteditable="true" id="itemSiteSiteName">${item.Site.siteName}</td>
+                        <td contenteditable="true" id="itemContactName">${item.Contact.name}</td>
+                        <td contenteditable="true" id="itemPartPartType">${item.Part.partType}</td>
+                        <td contenteditable="true" id="itemPartSerialNumber">${item.Part.serialNumber}</td>        
+                        <td contenteditable="true" id="itemFaultReasonForReturn">${item.Fault.reasonForReturn}</td>
+                        <td contenteditable="true" id="itemDispositionActionTaken">${item.Disposition.actionTaken}</td>
                         <td>${dateFns.format(item.createdAt, 'MMM D, YY')}</td>
                         <td>${dateFns.format(item.updatedAt, 'MMM D, YY')}</td>
                         <td>${putButton}</td>
@@ -77,14 +77,22 @@ const $tbody = $('#find-schedule-tbody');
                     console.table([error.name, error.type, error.stack])
                 }
             }
+
+            const updateTd = () => {
+                $('<td>').on('click', (event) => {
+                    event.preventDefault();
+                    console.log('tr has been clicked');
+                })
+            }
             const updateInventory = async (item) => {
                   const updateButton = $(`#${item.id}update`);
                 const deleteButton = $('#deleteInv');
                 
+
                  $(updateButton).on('click',(event) => {
                      event.preventDefault();
                      console.log(item);
-                     axios.put('/api/caseDetail/:id', item).then((response) => {
+                     axios.get('/api/caseDetail/:id', item).then((response) => {
                          console.log(response);
                          
                      })
@@ -135,7 +143,7 @@ const $tbody = $('#find-schedule-tbody');
             event.preventDefault();
             // callRmaCases();
             callRmaInvent();
-        
+            updateTd();
             
         })
 

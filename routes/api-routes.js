@@ -16,6 +16,15 @@ router.get('/caseDetail', (req,res) => {
 
 
 });
+router.get('/caseDetail/:id', (req,res) => {
+db.caseDetail.findOne({
+    include : [db.Part,db.Fault,db.Disposition,db.Contact,db.Site]
+}).then((response) => {
+    res.json(response);
+}).catch((error) => {
+    console.table([stack.error,stack.id,])
+})
+})
 router.get('/Part', (req,res) => {
     db.Part.findAll().then((response) => {
         // console.log(response);
@@ -211,9 +220,20 @@ router.put('/caseDetail/:id', (req,res) => {
         where: {
             id: req.body.id
         },
-    }).then((updatedCaseDetail)=>{
-        console.log(updatedCaseDetail);
-        res.json(updatedCaseDetail);
+    }).then((response)=>{
+        const updateEntry = {
+            id : req.body.itemId,
+            caseName : req.body.itemCaseName,
+            siteName : req.body.itemSiteSiteName,
+            contactName : req.body.itemContactName,
+            partType : req.body.itemPartPartType,
+            serialNumber : req.body.itemPartSerialNumber,
+            reasonForReturn : req.body.itemFaultReasonForFault,
+            actionTaken : req.body.itemDispositionActionTaken
+        }
+        console.log(updateEntry);
+        console.log(response);
+        res.json(updateEntry);
     }).catch((err) => {
         console.table([err.name, err.type, err.stack])
     })
