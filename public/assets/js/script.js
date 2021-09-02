@@ -84,15 +84,40 @@ const $tbody = $('#find-schedule-tbody');
                     console.log('tr has been clicked');
                 })
             }
-            const updateInventory = async (item) => {
+            const updateInventory = (item) => {
                   const updateButton = $(`#${item.id}update`);
-                const deleteButton = $('#deleteInv');
+                  const deleteButton = $('#deleteInv');
                 
-
+                $(deleteButton).on('click', (event) => {
+                    event.preventDefault();
+                    axios.get('/api/caseDetail').then((caseDetail)=> {
+                        console.log(caseDetail);
+                        const caseId = caseDetail.id;
+                        axios.put('/api/removeCase/:id', {
+                            caseId
+                        }).then((response) => {
+                            console.log(response);
+                            console.log('item deleted');
+                        })
+                    })
+                })
                  $(updateButton).on('click',(event) => {
                      event.preventDefault();
-                     console.log(item);
-                     axios.get('/api/caseDetail/:id', item).then((response) => {
+                
+                     const updateEntry = {
+                        id : $('#itemId').val(),
+                        caseName : $(`#itemCaseName`).val(),
+                        siteName : $(`#itemSiteSiteName`).val(),
+                        contactName : $(`#itemContactName`).val(),
+                        partType : $(`#itemPartPartType`).val(),
+                        serialNumber : $(`#itemPartSerialNumber`).val(),
+                        reasonForReturn : $(`#itemFaultReasonForReturn`).val(),
+                        actionTaken : $(`#itemDispositionActionTaken`).val()
+                     }
+
+                     console.log(updateEntry);
+                     
+                     axios.put('/api/caseDetail/:id', updateEntry).then((response) => {
                          console.log(response);
                          
                      })
@@ -179,25 +204,6 @@ const insertContact = $('#insertContact');
         const userId = user.id;
         sessionStorage.setItem('id', JSON.stringify(userId));
     })
-// Pass case data for Case Detail relation
-    // const insertContact = $('#insertContact');
-    // $.get('/api/Contact').then((data) => {
-    //     console.log(data);
-    //     data.forEach((contact) => {
-    //         const newContact = $('<option>').attr('value', contact.id).text(contact.name);
-    //         insertContact.append(newContact);
-    //     });
-    //     insertContact.formSelect();
-    // })
-    // const insertSite = $('#insertSite');
-    // $.get('/api/Case').then((data) => {
-    //     console.log(data);
-    //     data.forEach((site) => {
-    //         const newSite = $('<option>').attr('value', site.id).text(site.siteName);
-    //         insertSite.append(newSite);
-    //     });
-    //     insertSite.formSelect();
-    // })
 // Pass part data for Case Detail relation
     const insertPart = $('#insertPart');
     $.get('/api/Part').then((parts) => {
@@ -240,11 +246,3 @@ $.get('/api/Supplier').then((suppliers) => {
 })
 
 })
-
-            //     response.data.forEach((response) => {
-            //         console.log(response);
-            //         const caseContactName = response.Contact[i].name;
-            //         const caseSiteName = response[i].Site.siteName;
-            //         callRmaInvent(caseContactName, caseSiteName)
-    
-            //     })

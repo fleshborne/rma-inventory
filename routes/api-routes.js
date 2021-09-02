@@ -215,24 +215,28 @@ router.post('/Contact', (req,res) => {
     });
 })
 //  Put Requests ################################################
-router.put('/caseDetail/:id', (req,res) => {
+router.post('/caseDetail/:id', (req,res) => {
     db.caseDetail.findOne({
         where: {
             id: req.body.id
         },
     }).then((response)=>{
-        const updateEntry = {
-            id : req.body.itemId,
-            caseName : req.body.itemCaseName,
-            siteName : req.body.itemSiteSiteName,
-            contactName : req.body.itemContactName,
-            partType : req.body.itemPartPartType,
-            serialNumber : req.body.itemPartSerialNumber,
-            reasonForReturn : req.body.itemFaultReasonForFault,
-            actionTaken : req.body.itemDispositionActionTaken
-        }
-        console.log(updateEntry);
         console.log(response);
+        const updateEntry = {
+            id : req.body.id,
+            caseName : req.body.caseName,
+            siteName : req.body.siteName,
+            contactName : req.body.contactName,
+            partType : req.body.partType,
+            serialNumber : req.body.serialNumber,
+            reasonForReturn : req.body.reasonForReturn,
+            actionTaken : req.body.actionTaken
+        }
+
+        // await caseDetail.save(updateEntry);
+        db.caseDetail.update({updateEntry}).then((editedEntry) =>{
+            console.log(editedEntry);
+        })
         res.json(updateEntry);
     }).catch((err) => {
         console.table([err.name, err.type, err.stack])
@@ -240,5 +244,19 @@ router.put('/caseDetail/:id', (req,res) => {
 })
 
 //  Delete Requests #############################################
-
+router.put('/removeCase/:id', (req,res) => {
+    db.caseDetail.findOne({
+        where : {
+            id: req.body.id
+        },
+    }).then((caseDetail) => {
+        console.log(caseDetail);
+        caseDetail.destroy(
+            req.body.id,
+            res.json(caseDetail)
+        ).catch((err) => {
+            console.log(err);
+        });
+    });
+});
 module.exports = router;
