@@ -51,7 +51,7 @@ const $tbody = $('#find-schedule-tbody');
                         const putButton = `<button class="btn-warning btn waves-effect waves-yellow" id="${updateInv}update" type="put" name="action">Update
                         <i class="material-icons update">update</i>
                       </button>`
-                        const deleteButton = `<button class="btn waves-effect waves-red" id="deleteInv" type="delete" name="action">Delete
+                        const deleteButton = `<button class="btn waves-effect waves-red" id="${updateInv}deleteInv" type="delete" name="action">Delete
                         <i class="material-icons delete">delete</i>
                       </button>`
                         $tbody.append(`
@@ -86,15 +86,17 @@ const $tbody = $('#find-schedule-tbody');
             }
             const updateInventory = (item) => {
                   const updateButton = $(`#${item.id}update`);
-                  const deleteButton = $('#deleteInv');
+                  const deleteButton = $(`#${item.id}deleteInv`);
                 
                 $(deleteButton).on('click', (event) => {
                     event.preventDefault();
+                    console.log(item);
                     axios.get('/api/caseDetail').then((caseDetail)=> {
                         console.log(caseDetail);
-                        const caseId = caseDetail.id;
+                        const itemId = item.id;
+                        console.log(itemId);
                         axios.put('/api/removeCase/:id', {
-                            caseId
+                            itemId
                         }).then((response) => {
                             console.log(response);
                             console.log('item deleted');

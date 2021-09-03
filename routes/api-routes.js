@@ -247,7 +247,7 @@ router.post('/caseDetail/:id', (req,res) => {
 router.put('/removeCase/:id', (req,res) => {
     db.caseDetail.findOne({
         where : {
-            id: req.body.id
+            id: req.body.itemId
         },
     }).then((caseDetail) => {
         console.log(caseDetail);
