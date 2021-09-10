@@ -8,10 +8,15 @@ body {
 main {
     flex: 1 0 auto;
   }
-.nav-wrapper {
-    background: black;
-}
 
+
+.nav-wrapper {
+    background-color: black;
+    color: salmon;
+}
+#navText {
+    color: salmon;
+}
 #footer {
     position: sticky;
     bottom: 0;

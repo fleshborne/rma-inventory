@@ -2,6 +2,7 @@ const router = require('express').Router();
 const db = require('../models');
 const passport = require('../config/passport');
 const { eachQuarterOfInterval } = require('date-fns');
+const { sequelize, Sequelize } = require('../models');
 // Get Requests##################
 
 router.get('/caseDetail', (req,res) => {
@@ -22,8 +23,25 @@ db.caseDetail.findOne({
 }).then((response) => {
     res.json(response);
 }).catch((error) => {
-    console.table([stack.error,stack.id,])
+    console.table([stack.error,stack.id,error])
 })
+})
+router.get('/getCaseBySearch/:caseName', (req,res) => {
+    db.caseDetail.findAll({
+        where : {
+            caseName: req.params.caseName,
+        }
+    }).then((caseName) => {
+        console.log(caseName);
+        const sql = `SELECT * FROM caseDetail WHERE caseName like =%${caseName}%`
+        sequelize.query(sql, ((res,err) => {
+            console.log(res);
+            console.log(err);
+    }))   
+        res.json(caseName)
+    }).catch((error) => {
+        console.log(error);
+    })
 })
 router.get('/Part', (req,res) => {
     db.Part.findAll().then((response) => {
