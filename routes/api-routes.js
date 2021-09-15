@@ -3,6 +3,7 @@ const db = require('../models');
 const passport = require('../config/passport');
 const { eachQuarterOfInterval } = require('date-fns');
 const { sequelize, Sequelize } = require('../models');
+const Op = Sequelize.Op;
 // Get Requests##################
 
 router.get('/caseDetail', (req,res) => {
@@ -26,18 +27,18 @@ db.caseDetail.findOne({
     console.table([stack.error,stack.id,error])
 })
 })
-router.get('/getCaseBySearch/:caseName', (req,res) => {
+router.get('/caseDetail/:caseName', (req,res) => {
     db.caseDetail.findAll({
+        
+        include : [db.Part,db.Fault,db.Disposition,db.Contact,db.Site],
         where : {
-            caseName: req.params.caseName,
+            caseName:{ 
+              [Op.like]: req.params.caseName}
         }
     }).then((caseName) => {
         console.log(caseName);
-        const sql = `SELECT * FROM caseDetail WHERE caseName like =%${caseName}%`
-        sequelize.query(sql, ((res,err) => {
-            console.log(res);
-            console.log(err);
-    }))   
+        // const sql = `SELECT * FROM caseDetail WHERE caseName like =% ${caseName} %`
+        // sequelize.query(`SELECT * FROM caseDetail WHERE caseName like = caseName `)
         res.json(caseName)
     }).catch((error) => {
         console.log(error);
