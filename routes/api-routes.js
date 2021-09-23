@@ -18,32 +18,32 @@ router.get('/caseDetail', (req,res) => {
 
 
 });
-router.get('/caseDetail/:id', (req,res) => {
-db.caseDetail.findOne({
-    include : [db.Part,db.Fault,db.Disposition,db.Contact,db.Site]
-}).then((response) => {
-    res.json(response);
-}).catch((error) => {
-    console.table([stack.error,stack.id,error])
-})
-})
+// router.get('/caseDetail/:id', (req,res) => {
+// db.caseDetail.findOne({
+//     include : [db.Part,db.Fault,db.Disposition,db.Contact,db.Site]
+// }).then((response) => {
+//     res.json(response);
+// }).catch((error) => {
+//     console.table([stack.error,stack.id,error])
+// })
+// })
 router.get('/caseDetail/:caseName', (req,res) => {
     db.caseDetail.findAll({
-        
         include : [db.Part,db.Fault,db.Disposition,db.Contact,db.Site],
         where : {
             caseName:{ 
-              [Op.like]: req.params.caseName}
+              [Op.like]: `%${req.params.caseName}%`,
+            }
         }
-    }).then((caseName) => {
-        console.log(caseName);
-        // const sql = `SELECT * FROM caseDetail WHERE caseName like =% ${caseName} %`
-        // sequelize.query(`SELECT * FROM caseDetail WHERE caseName like = caseName `)
-        res.json(caseName)
+    }).then((response) => {
+        console.log('route has been reached');
+        // console.log(JSON.stringify(response, 'check this line'));
+        // console.log(response);
+        return res.json(response);
     }).catch((error) => {
         console.log(error);
     })
-})
+});
 router.get('/Part', (req,res) => {
     db.Part.findAll().then((response) => {
         // console.log(response);
