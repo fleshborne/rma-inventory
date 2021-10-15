@@ -18,15 +18,29 @@ router.get('/caseDetail', (req,res) => {
 
 
 });
-// router.get('/caseDetail/:id', (req,res) => {
-// db.caseDetail.findOne({
-//     include : [db.Part,db.Fault,db.Disposition,db.Contact,db.Site]
-// }).then((response) => {
-//     res.json(response);
-// }).catch((error) => {
-//     console.table([stack.error,stack.id,error])
-// })
-// })
+router.put('/updateCase/:id', (req,res) => {
+db.caseDetail.findOne({
+    include : [db.Part,db.Fault,db.Disposition,db.Contact,db.Site],
+    where: {
+        id: `${req.params.id}`
+    },
+}).then((response) => {
+    console.log(response);
+    const updatedCase = {
+       id : req.params.id,
+       caseName : req.params.caseName,
+       userId: req.params.userId,
+       contactId : req.params.contactId,
+       siteId : req.params.siteId,
+       partId : req.params.partId,
+       faultId : req.params.faultId,
+       dispositionId : req.params.dispositionId, 
+    }
+    res.json(updatedCase);
+}).catch((error) => {
+    console.table([stack.error,stack.id,error])
+})
+})
 router.get('/caseDetail/:caseName', (req,res) => {
     db.caseDetail.findAll({
         include : [db.Part,db.Fault,db.Disposition,db.Contact,db.Site],
